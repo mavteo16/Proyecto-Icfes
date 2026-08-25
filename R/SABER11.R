@@ -32,41 +32,30 @@ library(stringi)
 
 # Diccionario de rutas locales asociadas a cada período de evaluación
 rutas_archivos <- c(
-  "20141" = "C:/Users/Invitadou/Desktop/ICFES/Saber11_20141_homologada.txt",
-  "20142" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20142.txt",
-  
-  "20151" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20151.txt",
-  "20152" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20152.txt",
-  
-  "20161" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20161.txt",
-  "20162" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20162.txt",
-  
-  "20171" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20171.txt",
-  "20172" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20172.txt",
-  
-  "20181" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20181.txt",
-  "20182" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20182.txt",
-  
-  "20191" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20191.txt",
-  "20192" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20192 (1).txt",
-  
-  "20201" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20201.txt",
-  "20202" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20202.txt",
-  
-  "20211" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20211.txt",
-  "20212" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20212.txt",
-  
-  "20221" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20221 (1).txt",
-  "20222" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20222 (1).txt",
-  
-  "20231" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20231 (1).txt",
-  "20232" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20232.txt",
-  
-  "20241" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20241.txt",
-  "20242" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20242.txt",
-  
-  "20251" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20251.txt",
-  "20252" = "C:/Users/Invitadou/Desktop/ICFES/Examen_Saber_11_20252.txt"
+  "20141" = file.path(ruta_principal, "Saber11_20141_homologada.csv"),
+  "20142" = file.path(ruta_principal, "Examen_Saber_11_20142.txt"),
+  "20151" = file.path(ruta_principal, "Examen_Saber_11_20151.txt"),
+  "20152" = file.path(ruta_principal, "Examen_Saber_11_20152.txt"),
+  "20161" = file.path(ruta_principal, "Examen_Saber_11_20161.txt"),
+  "20162" = file.path(ruta_principal, "Examen_Saber_11_20162.txt"),
+  "20171" = file.path(ruta_principal, "Examen_Saber_11_20171.txt"),
+  "20172" = file.path(ruta_principal, "Examen_Saber_11_20172.txt"),
+  "20181" = file.path(ruta_principal, "Examen_Saber_11_20181.txt"),
+  "20182" = file.path(ruta_principal, "Examen_Saber_11_20182.txt"),
+  "20191" = file.path(ruta_principal, "Examen_Saber_11_20191.txt"),
+  "20192" = file.path(ruta_principal, "Examen_Saber_11_20192 (1).txt"),
+  "20201" = file.path(ruta_principal, "Examen_Saber_11_20201.txt"),
+  "20202" = file.path(ruta_principal, "Examen_Saber_11_20202.txt"),
+  "20211" = file.path(ruta_principal, "Examen_Saber_11_20211.txt"),
+  "20212" = file.path(ruta_principal, "Examen_Saber_11_20212.txt"),
+  "20221" = file.path(ruta_principal, "Examen_Saber_11_20221 (1).txt"),
+  "20222" = file.path(ruta_principal, "Examen_Saber_11_20222 (1).txt"),
+  "20231" = file.path(ruta_principal, "Examen_Saber_11_20231 (1).txt"),
+  "20232" = file.path(ruta_principal, "Examen_Saber_11_20232.txt"),
+  "20241" = file.path(ruta_principal, "Examen_Saber_11_20241.txt"),
+  "20242" = file.path(ruta_principal, "Examen_Saber_11_20242.txt"),
+  "20251" = file.path(ruta_principal, "Examen_Saber_11_20251.txt"),
+  "20252" = file.path(ruta_principal, "Examen_Saber_11_20252.txt")
 )
 
 
@@ -74,28 +63,20 @@ rutas_archivos <- c(
 # 3. SELECCIÓN DE VARIABLES OBJETIVO
 # ============================================================
 
-# Conjunto unificado de variables requeridas para el análisis longitudinal
 variables_objetivo <- c(
-  # Identificación esencial
   "periodo",
   "estu_consecutivo",
   "estu_estudiante",
-  
-  # Características institucionales del colegio
   "cole_area_ubicacion",
   "cole_bilingue",
   "cole_calendario",
   "cole_jornada",
   "cole_naturaleza",
-  
-  # Contexto geográfico y socioeconómico
   "estu_depto_reside",
   "estu_inse_individual",
   "estu_repite",
   "fami_estratovivienda",
   "fami_tieneinternet",
-  
-  # Desempeño y resultados académicos
   "punt_c_naturales",
   "punt_ingles",
   "punt_lectura_critica",
@@ -110,9 +91,6 @@ variables_objetivo <- c(
 # 4. FUNCIONES DE APOYO Y NORMALIZACIÓN
 # ============================================================
 
-# ------------------------------------------------------------
-# 4.1. Normalizar cadenas de texto para homologación de nombres
-# ------------------------------------------------------------
 normalizar_nombre <- function(x) {
   x <- trimws(as.character(x))
   x <- tolower(x)
@@ -123,10 +101,6 @@ normalizar_nombre <- function(x) {
   return(x)
 }
 
-
-# ------------------------------------------------------------
-# 4.2. Lectura robusta de microdatos con manejo de codificación
-# ------------------------------------------------------------
 leer_archivo_icfes <- function(ruta) {
   if (!file.exists(ruta)) {
     stop(paste0("\nArchivo no encontrado en la ruta especificada:\n", ruta))
@@ -134,7 +108,6 @@ leer_archivo_icfes <- function(ruta) {
   
   cat("\nLeyendo archivo:", basename(ruta), "\n")
   
-  # Intento principal de lectura bajo codificación UTF-8
   resultado <- tryCatch({
     fread(
       file = ruta,
@@ -153,7 +126,6 @@ leer_archivo_icfes <- function(ruta) {
     NULL
   })
   
-  # Plan de contingencia: si UTF-8 falla, se reintenta con Latin-1
   if (is.null(resultado)) {
     resultado <- tryCatch({
       fread(
@@ -180,10 +152,6 @@ leer_archivo_icfes <- function(ruta) {
   return(resultado)
 }
 
-
-# ------------------------------------------------------------
-# 4.3. Estandarizar nombres de columnas frente al objetivo
-# ------------------------------------------------------------
 estandarizar_columnas <- function(dt, variables_objetivo) {
   nombres_originales <- names(dt)
   nombres_normalizados <- normalizar_nombre(nombres_originales)
@@ -203,10 +171,6 @@ estandarizar_columnas <- function(dt, variables_objetivo) {
   return(dt)
 }
 
-
-# ------------------------------------------------------------
-# 4.4. Rellenar con NA las variables ausentes en años particulares
-# ------------------------------------------------------------
 completar_variables <- function(dt, variables_objetivo) {
   faltantes <- setdiff(variables_objetivo, names(dt))
   
@@ -235,19 +199,11 @@ for (periodo_archivo in names(rutas_archivos)) {
   
   ruta <- rutas_archivos[[periodo_archivo]]
   
-  # Paso A: Lectura del archivo plano
   dt <- leer_archivo_icfes(ruta)
-  
-  # Paso B: Homologación de nombres de columnas
   dt <- estandarizar_columnas(dt, variables_objetivo)
-  
-  # Paso C: Creación de variables faltantes si el año no las posee
   dt <- completar_variables(dt, variables_objetivo)
-  
-  # Paso D: Selección estricta de las columnas objetivo
   dt <- dt[, ..variables_objetivo]
   
-  # Paso E: Almacenamiento en lista temporal
   lista_bases[[periodo_archivo]] <- dt
 }
 
@@ -275,18 +231,14 @@ cat("Variables totales:", ncol(base_final), "\n")
 # 7. LIMPIEZA Y FILTRADO TEMPORAL (2014-2025)
 # ============================================================
 
-# 7.1. Limpieza de consecutivo de estudiante
 base_final[, estu_consecutivo := trimws(as.character(estu_consecutivo))]
 base_final[estu_consecutivo == "", estu_consecutivo := NA_character_]
 
-# 7.2. Limpieza de campo período
 base_final[, periodo := trimws(as.character(periodo))]
 base_final[periodo == "", periodo := NA_character_]
 
-# 7.3. Extracción numérica del año del período
 base_final[, anio_periodo := suppressWarnings(as.integer(substr(periodo, 1, 4)))]
 
-# 7.4. Aplicación de filtro estricto por ventana temporal 2014-2025
 filas_iniciales <- nrow(base_final)
 
 base_final <- base_final[
@@ -296,8 +248,6 @@ base_final <- base_final[
 ]
 
 filas_finales <- nrow(base_final)
-
-# Eliminación de columna auxiliar temporal
 base_final[, anio_periodo := NULL]
 
 
@@ -313,7 +263,6 @@ cat("Filas antes del filtro temporal:", filas_iniciales, "\n")
 cat("Filas después del filtro temporal:", filas_finales, "\n")
 cat("Registros descartados fuera de rango:", filas_iniciales - filas_finales, "\n\n")
 
-# Verificación de integridad estructural de variables objetivo
 faltantes_finales <- setdiff(variables_objetivo, names(base_final))
 
 if (length(faltantes_finales) > 0) {
@@ -322,16 +271,13 @@ if (length(faltantes_finales) > 0) {
   cat("[OK] Verificación superada: Todas las variables de interés están presentes.\n")
 }
 
-# Control de valores nulos en identificadores clave
 cat("  - Conteo de 'estu_consecutivo' en NA:", sum(is.na(base_final$estu_consecutivo)), "\n")
 cat("  - Conteo de 'periodo' en NA:", sum(is.na(base_final$periodo)), "\n\n")
 
-# Reporte de distribución por períodos detectados
 periodos_detectados <- sort(unique(na.omit(base_final$periodo)))
 cat("Períodos válidos detectados en la serie:\n")
 print(periodos_detectados)
 
-# Resumen de registros por cada período
 resumen_periodos <- base_final[, .(registros = .N), by = periodo]
 setorder(resumen_periodos, periodo)
 
@@ -343,10 +289,8 @@ print(resumen_periodos)
 # 9. EXPORTACIÓN DEL ARCHIVO CONSOLIDADO
 # ============================================================
 
-ruta_salida <- paste0(
-  "C:/Users/Invitadou/Desktop/ICFES/",
-  "SABER11_2014_2025_VARIABLES_INTERES.csv"
-)
+# Usamos ruta_principal de forma portátil para que se guarde en Datos/
+ruta_salida <- file.path(ruta_principal, "SABER 11 COMPLETO.csv")
 
 cat("\nExportando base consolidada a disco...\n")
 fwrite(
