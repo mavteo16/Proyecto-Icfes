@@ -1,11 +1,10 @@
 # ============================================================
 # PROYECTO ICFES: LIMPIEZA, UNIFICACIÓN Y VALIDACIÓN DE VARIABLES
 # ============================================================
-# Descripción: Este script carga la base de datos consolidada, aplica
-# reglas estrictas de estandarización y limpieza de texto campo por campo 
-# (departamentos, estratos, características institucionales, socioeconómicas 
-# y académicas), ejecuta una comprobación matemática de frecuencias y 
-# exporta la base limpia junto a su reporte de validación en CSV y Excel.
+# Descripción: Este script carga la base de datos depurada (sin anomalías), 
+# aplica reglas estrictas de estandarización y limpieza de texto campo por campo,
+# ejecuta una comprobación matemática de frecuencias y exporta la base limpia
+# junto a su reporte de validación en CSV y Excel.
 # ============================================================
 
 
@@ -20,26 +19,29 @@ suppressPackageStartupMessages({
   library(openxlsx)
 })
 
+if (!exists("ruta_principal")) {
+  ruta_principal <- "Datos"
+}
+
 
 # ============================================================
-# 2. CARGA DE LA BASE CONSOLIDADA SIN LIMPIAR
+# 2. CARGA DE LA BASE DE DATOS SIN ANOMALÍAS (PASO PREVIO)
 # ============================================================
 
-# Usamos ruta_principal de forma portátil
-ruta_base <- file.path(ruta_principal, "BASE FINAL SIN LIMPIAR.csv")
+ruta_base <- "Resultados_Directos_S11_SPro/Base_Consolidada_Sin_Anomalias.csv"
 
 cat("\n============================================\n")
-cat("1. LEYENDO LA BASE CONSOLIDADA...\n")
+cat("1. LEYENDO LA BASE DE DATOS DEPURADA...\n")
 cat("============================================\n")
 
 if (!file.exists(ruta_base)) {
-  stop(paste0("No se encontró el archivo de entrada en: ", ruta_base))
+  stop(paste0("No se encontró el archivo de entrada en: ", ruta_base, ". Asegúrate de que el Paso 6 haya corrido bien."))
 }
 
 df <- fread(ruta_base, colClasses = "character") %>% as.data.frame()
 total_filas_inicial <- nrow(df)
 
-cat(sprintf("  -> Registros totales en la base: %s\n\n", format(total_filas_inicial, big.mark = ",")))
+cat(sprintf("  -> Registros totales en la base depurada: %s\n\n", format(total_filas_inicial, big.mark = ",")))
 
 
 # ============================================================
@@ -48,10 +50,8 @@ cat(sprintf("  -> Registros totales en la base: %s\n\n", format(total_filas_inic
 
 limpiar_nulos <- function(x) {
   x <- as.character(x)
-  # Identifica vacíos, NAs textuales, comillas repetidas o espacios vacíos
   x[is.na(x) | x %in% c("", "[VACÍO O NA]", "NA", "null", "NULL", "N/A", ".")] <- NA
   x <- trimws(x)
-  # Si quedan cadenas vacías tras el trim
   x[x == "" | grepl("^\"+$", x)] <- NA
   return(x)
 }
@@ -70,7 +70,6 @@ limpiar_depto_vector <- function(x, es_saber_pro = FALSE) {
   x <- limpiar_nulos(x)
   if(all(is.na(x))) return(x)
   
-  # Agrupación de ciudades internacionales en "Extranjero" para Saber Pro
   ciudades_extranjeras <- c(
     "ROMA", "MADRID", "NUEVA YORK", "ATLANTA", "BARCELONA", 
     "CIUDAD DE PANAMÁ", "FLANDES ORIENTAL", "FRANKFURT", 
@@ -262,7 +261,7 @@ if("SP_inst_nombre_institucion" %in% names(df)) {
 if("SP_estu_prgm_academico" %in% names(df)) {
   df$SP_estu_prgm_academico <- limpiar_nulos(df$SP_estu_prgm_academico)
   df$SP_estu_prgm_academico <- str_to_title(df$SP_estu_prgm_academico)
-  df$SP_estu_prgm_academico <- gsub("\\.$", "", df$SP_estu_prgm_academico) # Eliminar punto final si existe
+  df$SP_estu_prgm_academico <- gsub("\\.$", "", df$SP_estu_prgm_academico)
 }
 
 
@@ -286,7 +285,9 @@ vars_a_verificar <- c(
 
 reporte_validacion <- data.frame(
   Variable = character(),
-  Suma_Validos_Y_NAs = numeric(),
+  Validos = numeric(),
+  Nulos_NA = numeric(),
+  Suma_Total = numeric(),
   Total_Filas_Base = numeric(),
   Estado_Cuadre = character(),
   stringsAsFactors = FALSE
@@ -294,12 +295,16 @@ reporte_validacion <- data.frame(
 
 for(v in vars_a_verificar) {
   if(v %in% names(df)) {
-    sum_conteo <- sum(!is.na(df[[v]])) + sum(is.na(df[[v]]))
+    n_validos <- sum(!is.na(df[[v]]))
+    n_nas <- sum(is.na(df[[v]]))
+    sum_conteo <- n_validos + n_nas
     coincide <- (sum_conteo == total_filas_inicial)
     
     reporte_validacion <- rbind(reporte_validacion, data.frame(
       Variable = v,
-      Suma_Validos_Y_NAs = sum_conteo,
+      Validos = n_validos,
+      Nulos_NA = n_nas,
+      Suma_Total = sum_conteo,
       Total_Filas_Base = total_filas_inicial,
       Estado_Cuadre = ifelse(coincide, "OK (Cuadrado)", "ERROR")
     ))
@@ -317,17 +322,14 @@ cat("\n============================================\n")
 cat("4. EXPORTANDO LA BASE DE DATOS LIMPIA Y VALIDADA...\n")
 cat("============================================\n")
 
-# Creación automática de la carpeta de resultados de manera limpia
 directorio_salida <- "Resultados_Directos_S11_SPro"
 if (!dir.exists(directorio_salida)) {
   dir.create(directorio_salida, recursive = TRUE)
 }
 
-# A. Exportar base de datos limpia en formato CSV
 ruta_csv_limpia <- file.path(directorio_salida, "Base_Consolidada_Limpia.csv")
 write.csv(df, ruta_csv_limpia, row.names = FALSE)
 
-# B. Exportar reporte de validación matemática en Excel
 ruta_excel_val <- file.path(directorio_salida, "Reporte_Validacion_Limpieza.xlsx")
 wb <- createWorkbook()
 addWorksheet(wb, "Validacion_Sumas")

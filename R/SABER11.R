@@ -1,11 +1,10 @@
 # ============================================================
 # PROYECTO ICFES: CONSOLIDACIÓN Y ESTANDARIZACIÓN SABER 11
-# VENTANA TEMPORAL: 2014 - 2025
+# VENTANA TEMPORAL: 2010 - 2025 (HISTÓRICO + MODERNO)
 # ============================================================
 # Descripción: Este script lee, homologa, depura y consolida
-# los microdatos históricos de la prueba Saber 11 para los 
-# períodos comprendidos entre 2014 y 2025, garantizando una 
-# estructura uniforme para los análisis posteriores.
+# los microdatos históricos y modernos de la prueba Saber 11, 
+# garantizando una estructura uniforme y auditada para los análisis.
 # ============================================================
 
 
@@ -13,7 +12,6 @@
 # 1. CONFIGURACIÓN DEL ENTORNO Y LIBRERÍAS
 # ============================================================
 
-# Verificación e instalación automática de dependencias necesarias
 paquetes_requeridos <- c("data.table", "stringi")
 
 for (paquete in paquetes_requeridos) {
@@ -25,13 +23,24 @@ for (paquete in paquetes_requeridos) {
 library(data.table)
 library(stringi)
 
+if (!exists("ruta_principal")) {
+  ruta_principal <- "Datos"
+}
+
 
 # ============================================================
 # 2. DEFINICIÓN DE RUTAS DE LOS ARCHIVOS FUENTE
 # ============================================================
 
-# Diccionario de rutas locales asociadas a cada período de evaluación
 rutas_archivos <- c(
+  "20101" = file.path(ruta_principal, "Saber11_20101_homologada.csv"),
+  "20102" = file.path(ruta_principal, "Saber11_20102_homologada.csv"),
+  "20111" = file.path(ruta_principal, "Saber11_20111_homologada.csv"),
+  "20112" = file.path(ruta_principal, "Saber11_20112_homologada.csv"),
+  "20121" = file.path(ruta_principal, "Saber11_20121_homologada.csv"),
+  "20122" = file.path(ruta_principal, "Saber11_20122_homologada.csv"),
+  "20131" = file.path(ruta_principal, "Saber11_20131_homologada.csv"),
+  "20132" = file.path(ruta_principal, "Saber11_20132_homologada.csv"),
   "20141" = file.path(ruta_principal, "Saber11_20141_homologada.csv"),
   "20142" = file.path(ruta_principal, "Examen_Saber_11_20142.txt"),
   "20151" = file.path(ruta_principal, "Examen_Saber_11_20151.txt"),
@@ -109,38 +118,14 @@ leer_archivo_icfes <- function(ruta) {
   cat("\nLeyendo archivo:", basename(ruta), "\n")
   
   resultado <- tryCatch({
-    fread(
-      file = ruta,
-      sep = ";",
-      encoding = "UTF-8",
-      quote = "\"",
-      fill = Inf,
-      header = TRUE,
-      na.strings = c("", "NA", "N/A", "NULL", "null", "NaN", "nan"),
-      strip.white = TRUE,
-      showProgress = FALSE,
-      data.table = TRUE,
-      check.names = FALSE
-    )
-  }, error = function(e) {
-    NULL
-  })
+    fread(file = ruta, sep = ";", encoding = "UTF-8", quote = "\"", fill = Inf, header = TRUE,
+          na.strings = c("", "NA", "N/A", "NULL", "null", "NaN", "nan"), strip.white = TRUE, showProgress = FALSE, data.table = TRUE, check.names = FALSE)
+  }, error = function(e) { NULL })
   
   if (is.null(resultado)) {
     resultado <- tryCatch({
-      fread(
-        file = ruta,
-        sep = ";",
-        encoding = "Latin-1",
-        quote = "\"",
-        fill = Inf,
-        header = TRUE,
-        na.strings = c("", "NA", "N/A", "NULL", "null", "NaN", "nan"),
-        strip.white = TRUE,
-        showProgress = FALSE,
-        data.table = TRUE,
-        check.names = FALSE
-      )
+      fread(file = ruta, sep = ";", encoding = "Latin-1", quote = "\"", fill = Inf, header = TRUE,
+            na.strings = c("", "NA", "N/A", "NULL", "null", "NaN", "nan"), strip.white = TRUE, showProgress = FALSE, data.table = TRUE, check.names = FALSE)
     }, error = function(e) {
       stop(paste0("\nFallo crítico de lectura en:\n", ruta, "\n\nDetalle del error: ", e$message))
     })
@@ -148,7 +133,6 @@ leer_archivo_icfes <- function(ruta) {
   
   names(resultado) <- trimws(names(resultado))
   cat("  -> Filas leídas:", nrow(resultado), "| Columnas:", ncol(resultado), "\n")
-  
   return(resultado)
 }
 
@@ -167,20 +151,17 @@ estandarizar_columnas <- function(dt, variables_objetivo) {
       setnames(dt, nombres_originales[indices[1]], variable)
     }
   }
-  
   return(dt)
 }
 
 completar_variables <- function(dt, variables_objetivo) {
   faltantes <- setdiff(variables_objetivo, names(dt))
-  
   if (length(faltantes) > 0) {
     cat("  -> Variables ausentes en este periodo (completadas con NA):", paste(faltantes, collapse = ", "), "\n")
     for (variable in faltantes) {
       dt[, (variable) := NA_character_]
     }
   }
-  
   return(dt)
 }
 
@@ -192,13 +173,11 @@ completar_variables <- function(dt, variables_objetivo) {
 lista_bases <- list()
 
 for (periodo_archivo in names(rutas_archivos)) {
-  
   cat("\n============================================\n")
   cat("PROCESANDO PERÍODO:", periodo_archivo, "\n")
   cat("============================================\n")
   
   ruta <- rutas_archivos[[periodo_archivo]]
-  
   dt <- leer_archivo_icfes(ruta)
   dt <- estandarizar_columnas(dt, variables_objetivo)
   dt <- completar_variables(dt, variables_objetivo)
@@ -216,11 +195,7 @@ cat("\n============================================\n")
 cat("CONSOLIDANDO TODAS LAS COHORTES...\n")
 cat("============================================\n")
 
-base_final <- rbindlist(
-  lista_bases,
-  use.names = TRUE,
-  fill = TRUE
-)
+base_final <- rbindlist(lista_bases, use.names = TRUE, fill = TRUE)
 
 cat("Consolidación inicial completada.\n")
 cat("Registros totales:", nrow(base_final), "\n")
@@ -228,7 +203,7 @@ cat("Variables totales:", ncol(base_final), "\n")
 
 
 # ============================================================
-# 7. LIMPIEZA Y FILTRADO TEMPORAL (2014-2025)
+# 7. LIMPIEZA Y FILTRADO TEMPORAL (2010-2025)
 # ============================================================
 
 base_final[, estu_consecutivo := trimws(as.character(estu_consecutivo))]
@@ -243,7 +218,7 @@ filas_iniciales <- nrow(base_final)
 
 base_final <- base_final[
   !is.na(anio_periodo) &
-    anio_periodo >= 2014 &
+    anio_periodo >= 2010 &
     anio_periodo <= 2025
 ]
 
@@ -252,11 +227,11 @@ base_final[, anio_periodo := NULL]
 
 
 # ============================================================
-# 8. CONTROLES DE CALIDAD Y AUDITORÍA
+# 8. CONTROLES DE CALIDAD Y AUDITORÍA NUMÉRICA
 # ============================================================
 
 cat("\n============================================\n")
-cat("REPORTE DE CONTROLES DE CALIDAD\n")
+cat("REPORTE DE CONTROLES DE CALIDAD Y AUDITORÍA\n")
 cat("============================================\n")
 
 cat("Filas antes del filtro temporal:", filas_iniciales, "\n")
@@ -264,7 +239,6 @@ cat("Filas después del filtro temporal:", filas_finales, "\n")
 cat("Registros descartados fuera de rango:", filas_iniciales - filas_finales, "\n\n")
 
 faltantes_finales <- setdiff(variables_objetivo, names(base_final))
-
 if (length(faltantes_finales) > 0) {
   stop(paste0("\nERROR CRÍTICO: FALTAN VARIABLES EN LA BASE FINAL:\n", paste(faltantes_finales, collapse = ", ")))
 } else {
@@ -274,14 +248,14 @@ if (length(faltantes_finales) > 0) {
 cat("  - Conteo de 'estu_consecutivo' en NA:", sum(is.na(base_final$estu_consecutivo)), "\n")
 cat("  - Conteo de 'periodo' en NA:", sum(is.na(base_final$periodo)), "\n\n")
 
-periodos_detectados <- sort(unique(na.omit(base_final$periodo)))
-cat("Períodos válidos detectados en la serie:\n")
-print(periodos_detectados)
-
-resumen_periodos <- base_final[, .(registros = .N), by = periodo]
+resumen_periodos <- base_final[, .(
+  Registros = .N,
+  Puntajes_Mat_Validos = sum(!is.na(suppressWarnings(as.numeric(punt_matematicas)))),
+  Puntajes_Mat_NAs = sum(is.na(suppressWarnings(as.numeric(punt_matematicas))))
+), by = periodo]
 setorder(resumen_periodos, periodo)
 
-cat("\nDistribución de registros por período:\n")
+cat("\n[Auditoría Numérica] Distribución y completitud por período:\n")
 print(resumen_periodos)
 
 
@@ -289,17 +263,10 @@ print(resumen_periodos)
 # 9. EXPORTACIÓN DEL ARCHIVO CONSOLIDADO
 # ============================================================
 
-# Usamos ruta_principal de forma portátil para que se guarde en Datos/
 ruta_salida <- file.path(ruta_principal, "SABER 11 COMPLETO.csv")
 
 cat("\nExportando base consolidada a disco...\n")
-fwrite(
-  base_final,
-  file = ruta_salida,
-  sep = ";",
-  bom = TRUE,
-  na = ""
-)
+fwrite(base_final, file = ruta_salida, sep = ";", bom = TRUE, na = "")
 
 
 # ============================================================

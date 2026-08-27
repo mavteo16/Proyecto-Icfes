@@ -1,12 +1,11 @@
 # ============================================================
 # PROYECTO ICFES: UNIFICACIÓN, CRUCE TOTAL Y ORDENAMIENTO
-# VENTANA TEMPORAL: 2014 - 2025
+# VENTANA TEMPORAL: SABER 11 (2010-2025) | SABER PRO (2014-2025)
 # ============================================================
 # Descripción: Este script integra la base de emparejamientos válidos
 # con los microdatos completos de Saber 11 y Saber Pro. Aplica un 
-# ordenamiento personalizado por bloques temáticos, genera un reporte 
-# de auditoría y estadísticas descriptivas, y exporta los resultados 
-# finales en formato CSV y Excel.
+# ordenamiento personalizado, genera auditorías numéricas rigurosas
+# y exporta los resultados finales en formato CSV y Excel.
 # ============================================================
 
 
@@ -20,12 +19,17 @@ suppressPackageStartupMessages({
   library(openxlsx)   # Para exportar reportes estructurados en Excel
 })
 
+# Seguridad por si se ejecuta de forma independiente
+if (!exists("ruta_principal")) {
+  ruta_principal <- "Datos"
+}
+
 
 # ============================================================
 # 2. CONFIGURACIÓN DE RUTAS DE ENTRADA Y SALIDA
 # ============================================================
 
-ruta_cruce    <- file.path(ruta_principal, "CRUCE_SABER11_SABERPRO_2014_2025.csv")
+ruta_cruce    <- file.path(ruta_principal, "CRUCE_SABER11_SABERPRO_2010_2025.csv")
 ruta_saber11  <- file.path(ruta_principal, "SABER 11 COMPLETO.csv")
 ruta_saberpro <- file.path(ruta_principal, "SABER PRO COMPLETO.csv")
 
@@ -35,21 +39,13 @@ directorio_salida <- "Resultados_Directos_S11_SPro"
 # ============================================================
 # 3. CONFIGURACIÓN DEL ORDEN FINAL DE COLUMNAS (PERSONALIZABLE)
 # ============================================================
-# Nota metodológica: Este vector define estrictamente la estructura 
-# y jerarquía con la que se organizarán las variables en la base final.
-# ============================================================
 
 orden_deseado <- c(
-  
-  # ==========================================
   # BLOQUE 1: IDENTIFICACIÓN SABER 11
-  # ==========================================
   "estu_consecutivo_sb11", 
   "periodo_sb11", 
   
-  # ==========================================
   # BLOQUE 2: SOCIOECONÓMICAS Y CONTEXTO SABER 11
-  # ==========================================
   "S11_estu_estudiante", 
   "S11_estu_depto_reside",
   "S11_fami_estratovivienda", 
@@ -62,9 +58,7 @@ orden_deseado <- c(
   "S11_cole_calendario", 
   "S11_cole_jornada", 
   
-  # ==========================================
   # BLOQUE 3: PUNTAJES SABER 11
-  # ==========================================
   "S11_punt_c_naturales", 
   "S11_punt_ingles", 
   "S11_punt_lectura_critica", 
@@ -73,15 +67,11 @@ orden_deseado <- c(
   "S11_punt_global", 
   "S11_percentil_global",
   
-  # ==========================================
   # BLOQUE 4: IDENTIFICACIÓN SABER PRO
-  # ==========================================
   "estu_consecutivo_sbpro", 
   "periodo_sbpro",
   
-  # ==========================================
   # BLOQUE 5: SOCIOECONÓMICAS Y CONTEXTO SABER PRO
-  # ==========================================
   "SP_estu_genero", 
   "SP_estu_depto_reside", 
   "SP_fami_estratovivienda", 
@@ -94,9 +84,7 @@ orden_deseado <- c(
   "SP_inst_nombre_institucion", 
   "SP_estu_prgm_academico", 
   
-  # ==========================================
   # BLOQUE 6: PUNTAJES SABER PRO
-  # ==========================================
   "SP_mod_comuni_escrita_punt", 
   "SP_mod_competen_ciudada_punt", 
   "SP_mod_ingles_punt", 
@@ -124,23 +112,19 @@ variables_saberpro <- c("estu_consecutivo", "periodo", variables_saberpro)
 
 cat("\n1. Leyendo bases y normalizando nombres de columnas...\n")
 
-# A. Lectura de la base de cruces oficiales (Con file = explícito)
 df_cruce <- fread(file = ruta_cruce, colClasses = "character") %>% as.data.frame()
 colnames(df_cruce) <- tolower(colnames(df_cruce))
 
-# B. Lectura y filtrado de Saber 11 (Con file = explícito)
 df_s11 <- fread(file = ruta_saber11, colClasses = "character") %>% as.data.frame()
 colnames(df_s11) <- tolower(colnames(df_s11))
 df_s11 <- df_s11 %>% select(any_of(variables_saber11))
 
-# C. Lectura y filtrado de Saber Pro (Con file = explícito)
 df_sp <- fread(file = ruta_saberpro, colClasses = "character") %>% as.data.frame()
 colnames(df_sp) <- tolower(colnames(df_sp))
 df_sp <- df_sp %>% select(any_of(variables_saberpro))
 
 cat("2. Limpiando y estandarizando llaves para asegurar un emparejamiento exacto...\n")
 
-# Limpieza de espacios y estandarización a mayúsculas en llaves de cruce
 df_cruce <- df_cruce %>% mutate(
   estu_consecutivo_sb11  = trimws(toupper(estu_consecutivo_sb11)),
   periodo_sb11           = trimws(toupper(periodo_sb11)),
@@ -158,7 +142,6 @@ df_sp <- df_sp %>% mutate(
   periodo          = trimws(toupper(periodo))
 )
 
-# Incorporación de prefijos diferenciadores por prueba
 colnames(df_s11) <- paste0("S11_", colnames(df_s11))
 colnames(df_sp)  <- paste0("SP_", colnames(df_sp))
 
@@ -173,7 +156,7 @@ base_final <- df_cruce %>%
   left_join(df_s11, by = c("estu_consecutivo_sb11" = "S11_estu_consecutivo", 
                            "periodo_sb11"         = "S11_periodo")) %>%
   left_join(df_sp,  by = c("estu_consecutivo_sbpro" = "SP_estu_consecutivo", 
-                           "periodo_sbpro"         = "SP_periodo"))
+                           "periodo_sbpro"        = "SP_periodo"))
 
 
 # ============================================================
@@ -187,10 +170,10 @@ base_final <- base_final %>%
 
 
 # ============================================================
-# 8. GENERACIÓN DE RESUMEN ESTADÍSTICO Y AUDITORÍA
+# 8. GENERACIÓN DE RESUMEN ESTADÍSTICO Y AUDITORÍA NUMÉRICA
 # ============================================================
 
-cat("5. Generando estadísticas descriptivas de puntajes...\n")
+cat("5. Generando estadísticas descriptivas y auditoría cuantitativa...\n")
 
 vars_num_s11 <- orden_deseado[grepl("S11_punt_|S11_percentil_", orden_deseado)]
 vars_num_sp  <- orden_deseado[grepl("SP_mod_.*_punt|SP_punt_|SP_percentil_", orden_deseado)]
@@ -235,6 +218,8 @@ auditoria <- data.frame(
   )
 )
 
+print(auditoria)
+
 
 # ============================================================
 # 9. EXPORTACIÓN DE RESULTADOS (CSV Y EXCEL)
@@ -244,7 +229,7 @@ cat("6. Exportando archivos consolidados a disco...\n")
 
 if (!dir.exists(directorio_salida)) dir.create(directorio_salida)
 
-# A. Guardar la base sin limpiar en Datos/ (Necesaria para el Paso 6)
+# A. Guardar la base sin limpiar en Datos/ (Necesaria para el Paso 6 de anomalías)
 ruta_salida_base <- file.path(ruta_principal, "BASE FINAL SIN LIMPIAR.csv")
 write.csv(base_final, ruta_salida_base, row.names = FALSE)
 cat("[OK] Base final sin limpiar generada en Datos/\n")

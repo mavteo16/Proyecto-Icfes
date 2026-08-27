@@ -66,7 +66,7 @@ source("R/UNIFICACION.R")
 # PASO 6: Detección, conteo y eliminación de anomalías numéricas
 # ------------------------------------------------------------
 cat("\n>>> [PASO 6/7] Ejecutando: detectar_anomalias.R...\n")
-source("R/detectar_anomalias.R")
+source("R/ANOMALIAS.R")
 
 
 # ------------------------------------------------------------
@@ -74,6 +74,10 @@ source("R/detectar_anomalias.R")
 # ------------------------------------------------------------
 cat("\n>>> [PASO 7/7] Ejecutando: LIMPIEZAFINAL.R...\n")
 source("R/LIMPIEZAFINAL.R")
+
+source("R/DESCRIPTIVAS.R")
+
+source("R/INFERENCIAL.R")
 
 
 # Cálculo del tiempo total de ejecución

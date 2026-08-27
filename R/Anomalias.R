@@ -2,8 +2,9 @@
 # SCRIPT DE DETECCIÓN, CONTEO Y ELIMINACIÓN DE ANOMALÍAS
 # ============================================================
 # Descripción: Inspecciona los puntajes de materias de Saber Pro,
-# detecta anomalías (>300 o decimales), cuenta estudiantes afectados,
-# elimina a dichos estudiantes y exporta la base de datos depurada.
+# detecta anomalías (>300 o decimales) protegiendo estrictamente
+# a los estudiantes con puntajes no publicados o en blanco (NA),
+# elimina únicamente a los anómalos reales y exporta la base depurada.
 # ============================================================
 
 suppressPackageStartupMessages({
@@ -12,7 +13,7 @@ suppressPackageStartupMessages({
 })
 
 cat("============================================================\n")
-cat("     DEPURACIÓN Y ELIMINACIÓN DE ANOMALÍAS EN SABER PRO     \n")
+cat("     DEPURACIÓN Y ELIMINACIÓN DE ANOMALÍAS EN SABER PRO      \n")
 cat("============================================================\n\n")
 
 # 1. Cargar la base de datos consolidada
@@ -47,7 +48,7 @@ if(length(col_id) == 0) {
   col_id <- col_id[1]
 }
 
-# 3. Construir matriz de análisis para detectar anomalías por celda y por estudiante
+# 3. Construir matriz de análisis para detectar anomalías
 matriz_anomalias <- data.frame(
   Estudiante_ID = df[[col_id]],
   Periodo = df[[col_periodo]]
@@ -55,14 +56,23 @@ matriz_anomalias <- data.frame(
 
 resultados_variables <- data.frame()
 
+cat("\nInspeccionando puntajes y filtrando valores no publicados (NA / vacíos)...\n")
+
 for (v in vars_materias_sp) {
   val_txt <- trimws(df[[v]])
+  
+  # Limpieza para detectar si es un número válido
   val_num <- suppressWarnings(as.numeric(gsub(",", ".", val_txt)))
   
-  es_decimal <- (!is.na(val_num) & (val_num %% 1 != 0)) | grepl("\\.[1-9]|,[1-9]", val_txt)
-  es_mayor_300 <- !is.na(val_num) & val_num > 300
-  es_anomalia <- es_decimal | es_mayor_300
+  # CRITERIO DE PROTECCIÓN: Si el valor es NA, vacío, o texto no numérico,
+  # SE EXCLUYE DE LA ANOMALÍA (es un puntaje no publicado / válido por ausencia).
+  es_valido_presente <- !is.na(val_num) & val_txt != "" & val_txt != "NA"
   
+  # Evaluar anomalías solo sobre puntajes reales existentes
+  es_decimal <- es_valido_presente & ((val_num %% 1 != 0) | grepl("\\.[1-9]|,[1-9]", val_txt))
+  es_mayor_300 <- es_valido_presente & (val_num > 300)
+  
+  es_anomalia <- es_decimal | es_mayor_300
   matriz_anomalias[[v]] <- es_anomalia
   
   temp_df <- data.frame(
@@ -96,11 +106,11 @@ if (nrow(resultados_variables) > 0) {
   resultados_variables <- resultados_variables %>% arrange(Periodo, Variable)
   print(as.data.frame(resultados_variables), row.names = FALSE)
 } else {
-  cat("[OK] No se encontraron anomalías por variable.\n")
+  cat("[OK] No se encontraron anomalías reales por variable.\n")
 }
 
 cat("\n============================================================\n")
-cat("     2. ESTUDIANTES CON AL MENOS UNA ANOMALÍA POR PERÍODO   \n")
+cat("     2. ESTUDIANTES CON AL MENOS UNA ANOMALÍA REAL POR PERÍODO\n")
 cat("============================================================\n")
 
 estudiantes_por_periodo <- matriz_anomalias %>%
@@ -112,11 +122,11 @@ estudiantes_por_periodo <- matriz_anomalias %>%
 if (nrow(estudiantes_por_periodo) > 0) {
   print(as.data.frame(estudiantes_por_periodo), row.names = FALSE)
 } else {
-  cat("[OK] Ningún estudiante presenta anomalías.\n")
+  cat("[OK] Ningún estudiante presenta anomalías reales.\n")
 }
 
 cat("\n============================================================\n")
-cat("                 3. RESUMEN GLOBAL TOTAL                    \n")
+cat("                 3. RESUMEN GLOBAL TOTAL                     \n")
 cat("============================================================\n")
 
 total_celdas_anomalas <- sum(resultados_variables$Cantidad_Anomalias, na.rm = TRUE)
@@ -125,23 +135,27 @@ total_estudiantes_global <- matriz_anomalias %>%
   summarise(Total = n_distinct(Estudiante_ID)) %>%
   pull(Total)
 
-cat(sprintf("  -> Total global de celdas con anomalías: %s\n", format(total_celdas_anomalas, big.mark = ",")))
-cat(sprintf("  -> Total global de estudiantes afectados: %s\n", format(total_estudiantes_global, big.mark = ",")))
+cat(sprintf("  -> Total global de celdas con anomalías reales: %s\n", format(total_celdas_anomalas, big.mark = ",")))
+cat(sprintf("  -> Total global de estudiantes afectados (eliminados): %s\n", format(total_estudiantes_global, big.mark = ",")))
+cat(sprintf("  -> Estudiantes sin puntaje (no publicados) protegidos y conservados válidos: %s\n", 
+            format(sum(!matriz_anomalias$Tiene_Anomalia_General), big.mark = ",")))
 
 # 5. Eliminación de estudiantes anómalos y exportación de la nueva base limpia
 cat("\n============================================================\n")
-cat("          4. DEPURACIÓN Y EXPORTACIÓN DE LA BASE            \n")
+cat("            4. DEPURACIÓN Y EXPORTACIÓN DE LA BASE           \n")
 cat("============================================================\n")
 
 df_depurada <- df[!matriz_anomalias$Tiene_Anomalia_General, ]
 total_filas_final <- nrow(df_depurada)
 filas_eliminadas <- total_filas_inicial - total_filas_final
+porcentaje_retencion <- round((total_filas_final / total_filas_inicial) * 100, 2)
 
 ruta_salida <- "Resultados_Directos_S11_SPro/Base_Consolidada_Sin_Anomalias.csv"
 fwrite(df_depurada, ruta_salida)
 
 cat(sprintf("  -> Registros iniciales en la base: %s\n", format(total_filas_inicial, big.mark = ",")))
-cat(sprintf("  -> Registros eliminados (estudiantes con anomalías): %s\n", format(filas_eliminadas, big.mark = ",")))
+cat(sprintf("  -> Registros eliminados (anomalías reales): %s\n", format(filas_eliminadas, big.mark = ",")))
 cat(sprintf("  -> Registros finales en la base depurada: %s\n", format(total_filas_final, big.mark = ",")))
+cat(sprintf("  -> [Auditoría Numérica] Porcentaje de retención de la base: %.2f%%\n", porcentaje_retencion))
 cat(sprintf("\n[¡ÉXITO!] Base depurada guardada en: %s\n", ruta_salida))
 cat("============================================================\n")

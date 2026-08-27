@@ -1,12 +1,10 @@
 # ============================================================
 # PROYECTO ICFES: FILTRADO, CÁLCULO DE REZAGO Y CONSOLIDACIÓN DE CRUCES
-# VENTANA TEMPORAL: 2014 - 2025 (TODOS LOS PERÍODOS)
+# VENTANA TEMPORAL: SABER 11 (2010-2025) | SABER PRO (2014-2025)
 # ============================================================
 # Descripción: Este script lee el archivo bruto de cruces entre pruebas,
-# valida las variables requeridas, filtra la ventana temporal permitida
-# para Saber 11 y Saber Pro, calcula el rezago académico en semestres,
-# aplica la regla de consistencia temporal (Saber Pro posterior a Saber 11)
-# y exporta la base de emparejamientos válidos definitiva.
+# valida las variables requeridas, aplica los filtros temporales diferenciados,
+# calcula el rezago académico, audita matemáticamente las reglas y exporta la base.
 # ============================================================
 
 
@@ -19,6 +17,11 @@ if (!requireNamespace("data.table", quietly = TRUE)) {
 }
 
 library(data.table)
+
+# Seguridad por si se ejecuta de forma independiente
+if (!exists("ruta_principal")) {
+  ruta_principal <- "Datos"
+}
 
 
 # ============================================================
@@ -56,7 +59,6 @@ for (nombre_archivo in names(rutas_archivos)) {
   cat("Ruta:", ruta, "\n")
   cat("============================================\n")
   
-  # A. Lectura de los datos
   datos <- fread(
     file = ruta,
     sep = "auto",
@@ -66,10 +68,8 @@ for (nombre_archivo in names(rutas_archivos)) {
     strip.white = TRUE
   )
   
-  # B. Limpieza de espacios en los nombres de columnas
   names(datos) <- trimws(names(datos))
   
-  # C. Verificación de integridad de variables obligatorias
   faltantes <- setdiff(variables_requeridas, names(datos))
   
   if (length(faltantes) > 0) {
@@ -80,7 +80,6 @@ for (nombre_archivo in names(rutas_archivos)) {
     ))
   }
   
-  # D. Conservación exclusiva de las 4 variables esenciales del cruce
   datos <- datos[, .(
     estu_consecutivo_sb11,
     periodo_sb11,
@@ -88,7 +87,6 @@ for (nombre_archivo in names(rutas_archivos)) {
     periodo_sbpro
   )]
   
-  # E. Almacenamiento en lista temporal
   lista_bases[[nombre_archivo]] <- datos
 }
 
@@ -119,10 +117,7 @@ base_cruces[, periodo_sbpro := trimws(as.character(periodo_sbpro))]
 
 
 # ============================================================
-# 7. CONVERSIÓN NUMÉrica Y EXTRACCIÓN DE AÑOS
-# ============================================================
-# Nota: Se convierten a entero y se usa división entera por 10 
-# (ej: 20141 %/% 10 = 2014) para aislar el año de aplicación.
+# 7. CONVERSIÓN NUMÉRICA Y EXTRACCIÓN DE AÑOS
 # ============================================================
 
 base_cruces[, periodo_sb11_num := suppressWarnings(as.integer(periodo_sb11))]
@@ -133,16 +128,16 @@ base_cruces[, anio_sbpro := periodo_sbpro_num %/% 10]
 
 
 # ============================================================
-# 8. FILTRADO POR RANGO TEMPORAL (2014 - 2025)
+# 8. FILTRADO POR RANGO TEMPORAL DIFERENCIADO
 # ============================================================
 
-# 8.1. Filtro para Saber 11
+# 8.1. Filtro para Saber 11 (2010 a 2025)
 base_cruces <- base_cruces[
-  anio_sb11 >= 2014 &
+  anio_sb11 >= 2010 &
     anio_sb11 <= 2025
 ]
 
-# 8.2. Filtro para Saber Pro
+# 8.2. Filtro para Saber Pro (2014 a 2025)
 base_cruces <- base_cruces[
   anio_sbpro >= 2014 &
     anio_sbpro <= 2025
@@ -151,8 +146,6 @@ base_cruces <- base_cruces[
 
 # ============================================================
 # 9. CÁLCULO DEL REZAGO ACADÉMICO ENTRE PRUEBAS
-# ============================================================
-# Fórmula que transforma los períodos en semestres y calcula la diferencia.
 # ============================================================
 
 base_cruces[, rezago_semestres := (
@@ -164,9 +157,6 @@ base_cruces[, rezago_semestres := (
 
 # ============================================================
 # 10. APLICACIÓN DE REGLA DE CONSISTENCIA TEMPORAL (REZAGO > 0)
-# ============================================================
-# Exigencia metodológica: El Saber Pro debe ser estrictamente posterior
-# al Saber 11. Se descartan órdenes invertidos o emparejamientos simultáneos.
 # ============================================================
 
 base_cruces <- base_cruces[
@@ -209,26 +199,35 @@ base_final <- base_cruces[, .(
 
 
 # ============================================================
-# 13. REPORTE Y CONTROLES DE CALIDAD
+# 13. AUDITORÍA NUMÉRICA Y CONTROLES DE CALIDAD
 # ============================================================
 
 cat("\n============================================\n")
-cat("RESULTADO FINAL DEL CRUCE Y FILTRADO\n")
+cat("RESULTADO FINAL DEL CRUCE Y AUDITORÍA NUMÉRICA\n")
 cat("============================================\n")
+
+# Auditorías matemáticas cuantitativas
+min_s11  <- min(as.integer(substr(base_final$periodo_sb11, 1, 4)), na.rm = TRUE)
+min_spro <- min(as.integer(substr(base_final$periodo_sbpro, 1, 4)), na.rm = TRUE)
+errores_rezago <- sum(base_final$rezago_semestres <= 0, na.rm = TRUE)
+
+cat(sprintf("  - Año mínimo Saber 11 en cruce: %d (Criterio >= 2010) -> %s\n", min_s11, if(min_s11 >= 2010) "[OK]" else "[ERROR]"))
+cat(sprintf("  - Año mínimo Saber Pro en cruce: %d (Criterio >= 2014) -> %s\n", min_spro, if(min_spro >= 2014) "[OK]" else "[ERROR]"))
+cat(sprintf("  - Registros con rezago inválido (<= 0): %d (Criterio == 0) -> %s\n\n", errores_rezago, if(errores_rezago == 0) "[OK]" else "[ERROR]"))
 
 cat("Total de emparejamientos válidos (rezago > 0):", nrow(base_final), "\n")
 cat("Estudiantes Saber 11 únicos en el panel:", uniqueN(base_final$estu_consecutivo_sb11), "\n")
 cat("Estudiantes Saber Pro únicos en el panel:", uniqueN(base_final$estu_consecutivo_sbpro), "\n\n")
 
-cat("Vista previa de los primeros 10 registros:\n")
-print(head(base_final, 10))
+cat("Distribución cuantitativa por semestres de rezago:\n")
+print(base_final[, .(Emparejamientos = .N), by = rezago_semestres][order(rezago_semestres)])
 
 
 # ============================================================
 # 14. EXPORTACIÓN DE LA BASE DE CRUCES DEPURADA
 # ============================================================
 
-ruta_salida <- file.path(ruta_principal, "CRUCE_SABER11_SABERPRO_2014_2025.csv")
+ruta_salida <- file.path(ruta_principal, "CRUCE_SABER11_SABERPRO_2010_2025.csv")
 
 cat("\nExportando base de cruces depurada a disco...\n")
 fwrite(
@@ -239,9 +238,6 @@ fwrite(
 )
 
 cat("\n============================================\n")
-cat("PROCESO FINALIZADO CON ÉXITO\n")
+cat("PROCESO DE CRUCES FINALIZADO CON ÉXITO\n")
 cat("============================================\n")
 cat("Base final guardada en:\n", ruta_salida, "\n")
-# Al final de CRUCES.R:
-ruta_salida_cruce <- file.path(ruta_principal, "CRUCE_SABER11_SABERPRO_2014_2025.csv")
-fwrite(base_final, ruta_salida_cruce, sep = ";", bom = TRUE)
