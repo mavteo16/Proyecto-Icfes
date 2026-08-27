@@ -10,8 +10,17 @@
 
 
 # ============================================================
-# 1. CONFIGURACIÓN DEL ENTORNO Y LIBRERÍAS
+# 1. VERIFICACIÓN, INSTALACIÓN Y CARGA AUTOMATIZADA DE LIBRERÍAS
 # ============================================================
+
+paquetes_requeridos <- c("data.table", "dplyr", "tidyr", "ggplot2", "openxlsx", "broom", "ggalluvial")
+
+for (pkg in paquetes_requeridos) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    message(sprintf("La librería '%s' no está instalada. Descargando e instalando automáticamente...", pkg))
+    install.packages(pkg, dependencies = TRUE)
+  }
+}
 
 suppressPackageStartupMessages({
   library(data.table)
@@ -20,13 +29,8 @@ suppressPackageStartupMessages({
   library(ggplot2)
   library(openxlsx)
   library(broom)
+  library(ggalluvial)
 })
-
-# Verificación e instalación robusta de dependencias gráficas avanzadas
-if (!requireNamespace("ggalluvial", quietly = TRUE)) {
-  install.packages("ggalluvial", dependencies = TRUE)
-}
-library(ggalluvial)
 
 if (!exists("ruta_principal")) {
   ruta_principal <- "Datos"
@@ -593,7 +597,7 @@ cat("[OK] Gráfico de tendencia temporal anual guardado con éxito.\n\n")
 # 8. EXPORTACIÓN GENERAL A EXCEL (TABLAS DE SUSTENTO)
 # ============================================================
 
-cat("11. Exportando todos los resultados y tablas de sustento a Excel...\n")
+cat("11. Exportando todos los resultados y tablas de sustento à Excel...\n")
 
 ruta_excel_inferencial <- file.path(directorio_salida, "Resultados_Inferenciales_Completos.xlsx")
 wb <- createWorkbook()

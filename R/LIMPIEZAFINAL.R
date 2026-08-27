@@ -9,8 +9,17 @@
 
 
 # ============================================================
-# 1. CONFIGURACIÓN DEL ENTORNO Y CARGA DE LIBRERÍAS
+# 1. VERIFICACIÓN, INSTALACIÓN Y CARGA AUTOMATIZADA DE LIBRERÍAS
 # ============================================================
+
+paquetes_requeridos <- c("data.table", "dplyr", "stringr", "openxlsx")
+
+for (pkg in paquetes_requeridos) {
+  if (!requireNamespace(pkg, quietly = TRUE)) {
+    message(sprintf("La librería '%s' no está instalada. Descargando e instalando automáticamente...", pkg))
+    install.packages(pkg, dependencies = TRUE)
+  }
+}
 
 suppressPackageStartupMessages({
   library(data.table)
