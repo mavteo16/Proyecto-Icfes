@@ -1,11 +1,11 @@
 # ============================================================
 # PROYECTO ICFES: MÓDULO DE ESTADÍSTICA INFERENCIAL INTEGRAL
-# (MODELOS OLS, VALOR AGREGADO, BRECHAS, HISTOGRAMAS Y REGIONES)
+# (MODELOS OLS, VALOR AGREGADO, BRECHAS, HISTOGRAMAS, REGIONES Y TENDENCIA ANUAL)
 # ============================================================
 # Descripción: Script maestro unificado que ajusta modelos OLS, 
 # calcula valor agregado institucional y departamental, evalúa brechas
-# de género, distribuciones globales y disparidades regionales (S11 & SPro),
-# generando visualizaciones de alta calidad y un Excel con todo el sustento numérico.
+# de género, distribuciones globales, disparidades regionales, tendencias 
+# temporales por año y analítica avanzada de alta gama (S11 & SPro).
 # ============================================================
 
 
@@ -22,15 +22,25 @@ suppressPackageStartupMessages({
   library(broom)
 })
 
+# Verificación e instalación robusta de dependencias gráficas avanzadas
+if (!requireNamespace("ggalluvial", quietly = TRUE)) {
+  install.packages("ggalluvial", dependencies = TRUE)
+}
+library(ggalluvial)
+
 if (!exists("ruta_principal")) {
   ruta_principal <- "Datos"
 }
 
 directorio_salida <- "Resultados_Directos_S11_SPro"
 directorio_graficos <- file.path(directorio_salida, "Graficos_Inferenciales")
+directorio_graficos_avanzados <- file.path(directorio_salida, "Graficos_Avanzados")
 
 if (!dir.exists(directorio_graficos)) {
   dir.create(directorio_graficos, recursive = TRUE)
+}
+if (!dir.exists(directorio_graficos_avanzados)) {
+  dir.create(directorio_graficos_avanzados, recursive = TRUE)
 }
 
 cat("============================================================\n")
@@ -41,7 +51,6 @@ cat("============================================================\n\n")
 # ============================================================
 # 2. CARGA Y FILTRADO ESTRICTO DE DATOS
 # ============================================================
-
 ruta_base <- file.path(directorio_salida, "Base_Consolidada_Limpia.csv")
 
 if (!file.exists(ruta_base)) {
@@ -63,7 +72,10 @@ df_model <- df %>%
     sp_cuantitativo = suppressWarnings(as.numeric(SP_mod_razona_cuantitat_punt)),
     sp_ciudadanas   = suppressWarnings(as.numeric(SP_mod_competen_ciudada_punt)),
     sp_comunicacion = suppressWarnings(as.numeric(SP_mod_comuni_escrita_punt)),
-    sp_ingles       = suppressWarnings(as.numeric(SP_mod_ingles_punt))
+    sp_ingles       = suppressWarnings(as.numeric(SP_mod_ingles_punt)),
+    # Extracción de años usando las columnas exactas de tu base unificada
+    anio_s11        = suppressWarnings(as.integer(substr(periodo_sb11, 1, 4))),
+    anio_spro       = suppressWarnings(as.integer(substr(periodo_sbpro, 1, 4)))
   ) %>%
   filter(!is.na(s11_global) & !is.na(sp_global) & !is.na(rezago) & !is.na(nse))
 
@@ -513,45 +525,276 @@ cat("[OK] Gráfico de evolución departamental guardado con éxito.\n\n")
 
 
 # ============================================================
-# 8. EXPORTACIÓN GENERAL A EXCEL (CON TODAS LAS TABLAS DE SUSTENTO)
+# 7.4. ENFOQUE 7: TENDENCIA TEMPORAL DEL RENDIMIENTO POR AÑO (S11 VS SPRO)
 # ============================================================
 
-cat("10. Exportando todos los resultados y tablas de sustento a Excel (Gráficos 1 al 8)...\n")
+cat("10. Analizando la tendencia temporal del rendimiento global por año...\n")
+
+tendencia_s11 <- df_model %>%
+  filter(!is.na(anio_s11) & anio_s11 >= 2010 & anio_s11 <= 2025) %>%
+  group_by(Anio = anio_s11) %>%
+  summarise(
+    Total_Estudiantes = n(),
+    Media_Puntaje_Global = round(mean(s11_global, na.rm = TRUE), 2),
+    Mediana_Puntaje_Global = round(median(s11_global, na.rm = TRUE), 2),
+    Desv_Estandar = round(sd(s11_global, na.rm = TRUE), 2),
+    .groups = "drop"
+  ) %>%
+  mutate(Prueba = "Saber 11 (Colegio)")
+
+tendencia_spro <- df_model %>%
+  filter(!is.na(anio_spro) & anio_spro >= 2010 & anio_spro <= 2025) %>%
+  group_by(Anio = anio_spro) %>%
+  summarise(
+    Total_Estudiantes = n(),
+    Media_Puntaje_Global = round(mean(sp_global, na.rm = TRUE), 2),
+    Mediana_Puntaje_Global = round(median(sp_global, na.rm = TRUE), 2),
+    Desv_Estandar = round(sd(sp_global, na.rm = TRUE), 2),
+    .groups = "drop"
+  ) %>%
+  mutate(Prueba = "Saber Pro (Universidad)")
+
+tendencia_temporal_unificada <- bind_rows(tendencia_s11, tendencia_spro)
+
+cat("Generando Gráfico 9: Tendencia Temporal del Rendimiento Global por Año...\n")
+
+colores_pruebas <- c("Saber 11 (Colegio)" = "#2b5c8f", "Saber Pro (Universidad)" = "#2a9d8f")
+
+grafico_tendencia <- ggplot(tendencia_temporal_unificada, aes(x = Anio, y = Media_Puntaje_Global, color = Prueba, group = Prueba)) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 3) +
+  facet_wrap(~ Prueba, scales = "free_y", ncol = 1) +
+  scale_color_manual(values = colores_pruebas) +
+  theme_minimal(base_size = 12) +
+  labs(
+    title = "Evolución Temporal del Puntaje Global Promedio (2010–2025)",
+    subtitle = "Tendencia interanual del rendimiento en Saber 11 y Saber Pro para el panel unificado",
+    x = "Año de Evaluación",
+    y = "Puntaje Global Promedio",
+    color = "Prueba Evaluada",
+    caption = "Fuente: Microdatos unificados ICFES (2010-2025)."
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, color = "#1a1a1a", margin = margin(b = 6)),
+    plot.subtitle = element_text(size = 11, color = "#555555", margin = margin(b = 15)),
+    strip.text = element_text(face = "bold", size = 11, color = "#333333"),
+    strip.background = element_rect(fill = "#f0f0f0", color = NA),
+    legend.position = "none",
+    panel.grid.major = element_line(color = "#e5e5e5", linewidth = 0.4),
+    panel.grid.minor = element_blank(),
+    plot.caption = element_text(size = 9, color = "#777777", hjust = 1, margin = margin(t = 10))
+  )
+
+ggsave(file.path(directorio_graficos, "9_Tendencia_Temporal_Anual.png"), plot = grafico_tendencia, width = 11, height = 7, dpi = 300)
+cat("[OK] Gráfico de tendencia temporal anual guardado con éxito.\n\n")
+
+
+# ============================================================
+# 8. EXPORTACIÓN GENERAL A EXCEL (TABLAS DE SUSTENTO)
+# ============================================================
+
+cat("11. Exportando todos los resultados y tablas de sustento a Excel...\n")
 
 ruta_excel_inferencial <- file.path(directorio_salida, "Resultados_Inferenciales_Completos.xlsx")
 wb <- createWorkbook()
 
-# Pestaña 1: Coeficientes del Modelo OLS (Soporte Gráfico 1)
 addWorksheet(wb, "Modelo_Predictibilidad")
 writeData(wb, "Modelo_Predictibilidad", tabla_coeficientes)
 
-# Pestaña 2: Valor Agregado IES (Soporte Gráfico 2)
 addWorksheet(wb, "Valor_Agregado_IES")
 writeData(wb, "Valor_Agregado_IES", instituciones_va)
 
-# Pestaña 3: Pruebas T y Brechas de Género (Soporte Gráfico 3)
 addWorksheet(wb, "Brechas_Genero")
 writeData(wb, "Brechas_Genero", resultados_genero)
 
-# Pestaña 4: Estadísticos Globales / Histogramas (Soporte Gráficos 4 y 5)
 addWorksheet(wb, "Distribuciones_Globales")
 writeData(wb, "Distribuciones_Globales", tabla_sustento_globales)
 
-# Pestaña 5: Ranking Departamental Saber Pro (Soporte Gráfico 6)
 addWorksheet(wb, "Depto_Saber_Pro")
 writeData(wb, "Depto_Saber_Pro", ranking_depto_sp)
 
-# Pestaña 6: Ranking Departamental Saber 11 (Soporte Gráfico 7)
 addWorksheet(wb, "Depto_Saber_11")
 writeData(wb, "Depto_Saber_11", ranking_depto_s11)
 
-# Pestaña 7: Evolución y Valor Agregado Departamental (Soporte Gráfico 8)
 addWorksheet(wb, "Evolucion_Departamental")
 writeData(wb, "Evolucion_Departamental", evolucion_departamental)
 
+addWorksheet(wb, "Tendencia_Temporal_Anual")
+writeData(wb, "Tendencia_Temporal_Anual", tendencia_temporal_unificada)
+
 saveWorkbook(wb, ruta_excel_inferencial, overwrite = TRUE)
 
-cat(sprintf("[¡ÉXITO!] Módulo inferencial integral finalizado con éxito.\n"))
-cat(sprintf("  -> 8 Gráficos de alta calidad generados en: %s\n", directorio_graficos))
-cat(sprintf("  -> Archivo Excel con 7 pestañas de sustento numérico guardado en: %s\n", ruta_excel_inferencial))
+
+# ============================================================
+# 9. MÓDULO DE ANALÍTICA AVANZADA E INVESTIGACIÓN PROFUNDA
+# (Enfoques 1, 3, 4 y 5 - Omitiendo el 2)
+# ============================================================
+
+cat("============================================================\n")
+cat("   INICIANDO MÓDULO DE ANALÍTICA AVANZADA (GRÁFICOS 1, 3, 4, 5)\n")
+cat("============================================================\n\n")
+
+df_adv <- df_model # Reutilizamos la base ya filtrada y limpia
+
+# Enfoque 1: Movilidad Académica Relativa (Diagrama de Aluvión / Sankey)
+cat(">>> Generando Analítica Avanzada [1/4]: Movilidad Académica (Sankey)...\n")
+df_sankey <- df_adv %>%
+  mutate(
+    quintil_s11  = paste0("Q", ntile(s11_global, 5)),
+    quintil_spro = paste0("Q", ntile(sp_global, 5))
+  ) %>%
+  count(quintil_s11, quintil_spro) %>%
+  rename(Frecuencia = n)
+
+grafico_sankey <- ggplot(df_sankey, aes(y = Frecuencia, axis1 = quintil_s11, axis2 = quintil_spro)) +
+  ggalluvial::geom_alluvium(aes(fill = quintil_s11), width = 1/12, alpha = 0.8) +
+  ggalluvial::geom_stratum(width = 1/6, fill = "gray80", color = "black") +
+  geom_text(stat = "stratum", aes(label = after_stat(stratum)), fontface = "bold", size = 3.5) +
+  scale_x_discrete(limits = c("Quintil Saber 11 (Colegio)", "Quintil Saber Pro (Universidad)"), expand = c(0.1, 0.1)) +
+  scale_fill_viridis_d(option = "plasma", begin = 0.2, end = 0.9) +
+  theme_minimal(base_size = 12) +
+  labs(
+    title = "Movilidad Académica Relativa: Transición de Quintiles (Colegio a Universidad)",
+    subtitle = "Diagrama de Aluvión (Sankey) que evalúa la movilidad y persistencia en la distribución de rendimiento",
+    y = "Número de Estudiantes",
+    fill = "Quintil en Saber 11",
+    caption = "Fuente: Microdatos unificados ICFES (2010-2025)."
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, color = "#1a1a1a"),
+    plot.subtitle = element_text(size = 11, color = "#555555"),
+    axis.text.x = element_text(face = "bold", size = 11),
+    legend.position = "bottom"
+  )
+
+ggsave(file.path(directorio_graficos_avanzados, "Av_1_Movilidad_Sankey.png"), plot = grafico_sankey, width = 11, height = 7, dpi = 300)
+
+
+# Enfoque 3: Gradientes de Equidad e Interacción Socioeconómica
+cat(">>> Generando Analítica Avanzada [2/4]: Gradientes de Equidad e Interacción Socioeconómica...\n")
+df_adv_eq <- df_adv %>%
+  mutate(
+    nse_tercil = ntile(nse, 3),
+    nse_etiqueta = case_when(
+      nse_tercil == 1 ~ "Nivel Socioeconómico Bajo",
+      nse_tercil == 2 ~ "Nivel Socioeconómico Medio",
+      nse_tercil == 3 ~ "Nivel Socioeconómico Alto"
+    )
+  )
+
+grafico_equidad <- ggplot(df_adv_eq %>% sample_n(min(4000, nrow(df_adv_eq))), aes(x = s11_global, y = sp_global, color = nse_etiqueta)) +
+  geom_point(alpha = 0.25, size = 1.2) +
+  geom_smooth(method = "lm", se = FALSE, linewidth = 1.2) +
+  scale_color_manual(values = c("#e76f51", "#f4a261", "#2a9d8f")) +
+  theme_minimal(base_size = 12) +
+  labs(
+    title = "Gradientes de Equidad e Interacción Socioeconómica",
+    subtitle = "Trayectoria de rendimiento Saber 11 vs Saber Pro segmentada por tercios del NSE individual",
+    x = "Puntaje Global Saber 11 (Colegio)",
+    y = "Puntaje Global Saber Pro (Universidad)",
+    color = "Estrato Socioeconómico",
+    caption = "Fuente: Microdatos unificados ICFES (2010-2025)."
+  ) +
+  theme(plot.title = element_text(face = "bold", size = 14), plot.subtitle = element_text(size = 11, color = "#555555"), legend.position = "bottom")
+
+ggsave(file.path(directorio_graficos_avanzados, "Av_3_Gradientes_Equidad.png"), plot = grafico_equidad, width = 11, height = 6.5, dpi = 300)
+
+
+# Enfoque 4: Matriz de Correlación Cruzada (Heatmap de Competencias)
+cat(">>> Generando Analítica Avanzada [3/4]: Matriz de Transferencia de Competencias (Heatmap)...\n")
+matriz_cor <- df_adv %>%
+  select(s11_matematicas = S11_punt_matematicas, s11_lectura = S11_punt_lectura_critica, 
+         s11_sociales = S11_punt_sociales_ciudadanas, s11_naturales = S11_punt_c_naturales, s11_ingles = S11_punt_ingles,
+         sp_cuantitativo = sp_cuantitativo, sp_lectura = sp_lectura, 
+         sp_ciudadanas = sp_ciudadanas, sp_comunicacion = sp_comunicacion, sp_ingles = sp_ingles) %>%
+  mutate(across(everything(), ~ suppressWarnings(as.numeric(.)))) %>%
+  rename(
+    "S11 Matemáticas"   = s11_matematicas,
+    "S11 Lectura Crít." = s11_lectura,
+    "S11 Sociales"      = s11_sociales,
+    "S11 Naturales"     = s11_naturales,
+    "S11 Inglés"        = s11_ingles,
+    "SP Cuantitativo"   = sp_cuantitativo,
+    "SP Lectura Crít."  = sp_lectura,
+    "SP Ciudadanas"     = sp_ciudadanas,
+    "SP Comunicación"   = sp_comunicacion,
+    "SP Inglés"         = sp_ingles
+  ) %>%
+  cor(use = "complete.obs")
+
+df_corr_long <- as.data.frame(as.table(matriz_cor)) %>%
+  filter(grepl("S11", Var1) & grepl("SP", Var2))
+
+grafico_heatmap <- ggplot(df_corr_long, aes(x = Var2, y = Var1, fill = Freq)) +
+  geom_tile(color = "white", linewidth = 0.5) +
+  geom_text(aes(label = round(Freq, 2)), color = "black", size = 3.5, fontface = "bold") +
+  scale_fill_gradient2(low = "#f4a261", mid = "white", high = "#2a9d8f", midpoint = 0.4, limit = c(0, 0.8)) +
+  theme_minimal(base_size = 11) +
+  labs(
+    title = "Matriz de Transferencia de Competencias: Saber 11 vs Saber Pro",
+    subtitle = "Correlación de Pearson entre áreas evaluadas en la educación media y los módulos genéricos universitarios",
+    x = "Módulos Saber Pro (Salida)",
+    y = "Áreas Saber 11 (Entrada)",
+    fill = "Coef. Correlación (r)",
+    caption = "Fuente: Microdatos unificados ICFES (2010-2025)."
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 13),
+    axis.text.x = element_text(angle = 35, hjust = 1, face = "bold"),
+    axis.text.y = element_text(face = "bold"),
+    panel.grid = element_blank()
+  )
+
+ggsave(file.path(directorio_graficos_avanzados, "Av_4_Heatmap_Competencias.png"), plot = grafico_heatmap, width = 11, height = 6.5, dpi = 300)
+
+
+# Enfoque 5: Gráficos de Pendientes Institucionales (Slope Graphs)
+cat(">>> Generando Analítica Avanzada [4/4]: Gráficos de Pendientes Institucionales (Slope Graphs)...\n")
+df_slope <- df_adv %>%
+  filter(!is.na(SP_inst_nombre_institucion) & SP_inst_nombre_institucion != "" & SP_inst_nombre_institucion != "NO REPORTADO / NA") %>%
+  group_by(Institucion = SP_inst_nombre_institucion) %>%
+  summarise(
+    N = n(),
+    S11_mean = mean(s11_global, na.rm = TRUE),
+    SPro_mean = mean(sp_global, na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  filter(N >= 200) %>%
+  arrange(desc(SPro_mean)) %>%
+  head(12) %>%
+  mutate(
+    S11_norm  = (S11_mean - min(S11_mean)) / (max(S11_mean) - min(S11_mean)),
+    SPro_norm = (SPro_mean - min(SPro_mean)) / (max(SPro_mean) - min(SPro_mean))
+  ) %>%
+  select(Institucion, S11_norm, SPro_norm) %>%
+  pivot_longer(cols = c(S11_norm, SPro_norm), names_to = "Momento", values_to = "IndiceRelativo") %>%
+  mutate(Momento = ifelse(Momento == "S11_norm", "1. Saber 11 (Entrada Media)", "2. Saber Pro (Salida Superior)"))
+
+grafico_slope <- ggplot(df_slope, aes(x = Momento, y = IndiceRelativo, group = Institucion, color = Institucion)) +
+  geom_line(linewidth = 1.3, alpha = 0.85) +
+  geom_point(size = 3.5) +
+  theme_minimal(base_size = 12) +
+  labs(
+    title = "Slope Graphs: Trayectoria Relativa Institucional (Entrada vs Salida)",
+    subtitle = "Evolución normalizada (Min-Max) del rendimiento promedio de las principales Instituciones de Educación Superior",
+    x = NULL,
+    y = "Índice Normalizado de Desempeño (0 a 1)",
+    color = "Institución de Educación Superior",
+    caption = "Fuente: Microdatos unificados ICFES (2010-2025). Filtro: IES con >= 200 estudiantes."
+  ) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11, color = "#555555"),
+    axis.text.x = element_text(face = "bold", size = 11),
+    legend.position = "right",
+    panel.grid.major.x = element_blank()
+  )
+
+ggsave(file.path(directorio_graficos_avanzados, "Av_5_SlopeGraph_Instituciones.png"), plot = grafico_slope, width = 12, height = 7, dpi = 300)
+
+cat("\n============================================================\n")
+cat(" [¡ÉXITO TOTAL!] MÓDULO INFERENCIAL Y ANALÍTICA AVANZADA FINALIZADOS\n")
+cat(sprintf("  -> Gráficos estándar en: %s\n", directorio_graficos))
+cat(sprintf("  -> Gráficos avanzados en: %s\n", directorio_graficos_avanzados))
+cat(sprintf("  -> Excel maestro en: %s\n", ruta_excel_inferencial))
 cat("============================================================\n")
