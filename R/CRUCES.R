@@ -29,7 +29,7 @@ if (!exists("ruta_principal")) {
 # ============================================================
 
 rutas_archivos <- c(
-  "cruce_1" = file.path(ruta_principal, "Cruce Examen Saber 11 - Examen Saber Pro (3).txt")
+  "cruce_1" = file.path(ruta_principal, "Cruce Examen Saber 11 - Examen Saber Pro.txt")
 )
 
 

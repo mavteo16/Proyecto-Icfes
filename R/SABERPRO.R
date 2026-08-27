@@ -37,7 +37,7 @@ rutas_archivos <- c(
   "2021" = file.path(ruta_principal, "Examen_Saber_Pro_Genericas_2021.txt"),
   "2022" = file.path(ruta_principal, "Examen_Saber_Pro_Genericas_2022.txt"),
   "2023" = file.path(ruta_principal, "Examen_Saber_Pro_Genericas_2023.txt"),
-  "2024" = file.path(ruta_principal, "Examen_Saber_Pro_Genericas_2024 (1).txt")
+  "2024" = file.path(ruta_principal, "Examen_Saber_Pro_Genericas_2024.txt")
 )
 
 

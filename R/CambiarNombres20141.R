@@ -20,7 +20,7 @@ cat("   INICIANDO HOMOLOGACIÓN FLEXIBLE CON AUDITORÍA NUMÉRICA   \n")
 cat("============================================================\n\n")
 
 variables_base <- c(
-  "periodo", "estu_consecutivo", "estu_estudiante",
+  "periodo", "estu_consecutivo","estu_genero" , "estu_estudiante",
   "cole_area_ubicacion", "cole_bilingue", "cole_calendario",
   "cole_jornada", "cole_naturaleza", "estu_depto_reside",
   "fami_estratovivienda", "fami_tieneinternet"
