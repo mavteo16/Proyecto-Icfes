@@ -354,7 +354,7 @@ Artificial</h1>
 <h3 class="subtitle">Proyecto: Panel Longitudinal Saber 11 – Saber Pro
 (ICFES)</h3>
 <h4 class="author">[Tu nombre]</h4>
-<h4 class="date">28 de agosto de 2026</h4>
+<h4 class="date">29 de agosto de 2026</h4>
 
 </div>
 
@@ -453,6 +453,612 @@ de la entrega.</p>
 </div>
 <div id="bitácora-de-interacciones" class="section level1">
 <h1>Bitácora de interacciones</h1>
+<div id="fase-selección-y-homologación-de-variables" class="section level2">
+<h2>Fase: Selección y Homologación de Variables</h2>
+<div class="bitacora-card">
+<h4>
+Entrada 8 — Homologación y selección de variables entre Saber 11 y Saber
+Pro
+</h4>
+<div class="bitacora-meta">
+Fecha: [COMPLETAR]  |  Etapa: Selección de variables previa a la
+construcción del script (herramienta: Gemini)
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Objetivo</span> Seleccionar y
+homologar, de forma metodológicamente justificada, las variables de
+Saber Pro que debían conservarse en <code>variables_objetivo</code>,
+partiendo de las variables ya elegidas de Saber 11 y comparándolas
+contra el diccionario completo de variables disponibles en Saber Pro,
+evitando equivalencias forzadas solo por similitud de nombre.</p>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Intercambio 1 — Instrucciones del
+proceso en dos etapas</span></p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span> Estoy realizando un
+trabajo de análisis de datos cuyo objetivo es construir una base de
+datos consolidada de estudiantes que presentaron Saber 11 y
+posteriormente Saber Pro (2014–2025). Necesito seleccionar variables
+relevantes y homologarlas entre ambas pruebas, en dos etapas: primero
+analizar las variables ya elegidas de Saber 11, y luego comparar contra
+el listado completo de Saber Pro…
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+Estoy realizando un trabajo de análisis de datos cuyo objetivo es construir una base de datos consolidada de estudiantes que presentaron las pruebas Saber 11 y posteriormente presentaron las pruebas Saber Pro, considerando el período comprendido entre 2014 y 2025.
+
+Actualmente ya cuento con una base de datos de Saber 11, que comprende los períodos 20142 a 20252, y estoy construyendo la base correspondiente a Saber Pro.
+
+Debido a que las bases de datos contienen una gran cantidad de variables, necesito realizar una selección de aquellas que sean realmente relevantes para el análisis y, posteriormente, homologarlas entre ambas pruebas.
+
+Metodología: Etapa 1, te proporcionaré las variables que ya seleccioné de Saber 11 para que las analices y expliques qué información representa cada una. Etapa 2, te proporcionaré el listado completo de variables disponibles en Saber Pro para que compares ambos conjuntos, identifiques equivalencias (Alta/Media/Baja correspondencia), señales variables de Saber 11 sin equivalente razonable, y recomiendes variables adicionales de Saber Pro que enriquezcan el análisis (sociodemográficas, socioeconómicas, trayectoria académica, institución, desempeño, acceso y permanencia), siempre justificando por qué cada nueva variable aporta valor.
+
+Criterios importantes: no asumir equivalencia solo por nombres parecidos; comparar significado, población, momento de medición, escala y contenido; señalar explícitamente cuando no exista equivalente razonable; usar los nombres exactos de las variables; mostrar alternativas cuando varias variables de Saber Pro puedan corresponder a una misma de Saber 11 y recomendar cuál usar; evitar redundancias; priorizar variables que permitan análisis longitudinal.
+
+Resultado final esperado: una tabla con columnas Variable Saber 11 | Variable Saber Pro | Tipo de relación | Descripción | Utilidad para el análisis | Recomendación (Conservar/No conservar), más una sección independiente de &quot;Variables adicionales recomendadas de Saber Pro&quot;.
+
+No debes realizar todavía la selección de variables de Saber Pro hasta que te entregue el listado completo de variables disponibles. Cuando te entregue las variables de Saber 11, comienza únicamente por analizarlas y explicar qué información representa cada una.
+</pre>
+</details>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span> Gemini
+confirmó el proceso en dos etapas y se comprometió a no realizar todavía
+ninguna selección ni homologación con Saber Pro, detallando qué
+analizaría de cada variable de Saber 11 (nombre exacto, qué representa,
+qué mide, momento de medición, utilidad analítica y observaciones
+metodológicas) una vez se le entregara el listado.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+Entendido. Queda establecido el proceso en dos etapas y, por ahora, no realizaré ninguna selección ni homologación con Saber Pro.
+
+En la Etapa 1, cuando me entregues las variables que seleccionaste de Saber 11, analizaré exclusivamente esas variables. Para cada una identificaré: nombre exacto de la variable; qué información representa; qué mide concretamente (característica del estudiante, contexto familiar, institución, ubicación, desempeño, etc.); momento al que corresponde la medición, cuando pueda determinarse; posible utilidad analítica dentro del estudio de trayectoria Saber 11 → Saber Pro; observaciones metodológicas relevantes, como posibles limitaciones, variables categóricas/cuantitativas, cambios de interpretación entre años o posibles problemas de comparabilidad longitudinal.
+
+Además, prestaré especial atención a la estructura conceptual de la selección: qué dimensiones se están intentando conservar y qué tipo de información parece ser prioritaria, como criterio para evaluar posteriormente las variables de Saber Pro.
+
+No haré todavía: selección de variables de Saber Pro; búsqueda de equivalencias; recomendación de variables adicionales; eliminación de variables; construcción de la tabla definitiva de homologación.
+
+Cuando hayas terminado de proporcionar las variables de Saber 11, esperaré el listado completo de variables disponibles en Saber Pro para comenzar la Etapa 2.
+</pre>
+</details>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Intercambio 2 — Análisis de las
+variables ya seleccionadas de Saber 11</span></p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span> Envío de las 19
+variables elegidas de Saber 11 (identificación, características del
+colegio, contexto territorial/socioeconómico, trayectoria y resultados
+académicos), sin más instrucciones adicionales.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+Variables elegidas del saber 11: variables_objetivo &lt;- c(&quot;periodo &quot;,
+  &quot;estu_consecutivo&quot;,
+  &quot;estu_estudiante&quot;,
+  &quot;cole_area_ubicacion&quot;,
+  &quot;cole_bilingue&quot;,
+  &quot;cole_calendario&quot;,
+  &quot;cole_jornada&quot;,
+  &quot;cole_naturaleza&quot;,
+  &quot;estu_depto_reside&quot;,
+  &quot;estu_inse_individual&quot;,
+  &quot;estu_repite&quot;,
+  &quot;fami_estratovivienda&quot;,
+  &quot;fami_tieneinternet&quot;,
+  &quot;punt_c_naturales&quot;,
+  &quot;punt_ingles&quot;,
+  &quot;punt_lectura_critica&quot;,
+  &quot;punt_matematicas&quot;,
+  &quot;punt_sociales_ciudadanas&quot;,
+  &quot;percentil_global&quot;,
+  &quot;punt_global&quot;
+)
+</pre>
+</details>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span> Gemini
+organizó las 19 variables en cinco dimensiones conceptuales
+(identificación/temporalidad, contexto institucional, contexto
+territorial y socioeconómico, trayectoria académica previa, desempeño
+académico), documentando para cada una qué representa y su utilidad
+analítica, y dejó observaciones específicas a resolver en la Etapa 2
+(ej. si <code>estu_consecutivo</code> permite el cruce con Saber Pro, y
+si <code>estu_inse_individual</code> y <code>fami_estratovivienda</code>
+son redundantes).
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+Perfecto. Ya puedo establecer con bastante claridad qué estructura de información estás intentando conservar de Saber 11. En esta etapa no voy a compararlas todavía con Saber Pro; únicamente voy a interpretar las 20 variables seleccionadas y su función dentro del futuro análisis longitudinal.
+
+1. Identificación y trazabilidad del estudiante: periodo (ubica temporalmente la observación y construye la trayectoria 2014-2025), estu_consecutivo (identificador técnico; debe verificarse si permite el enlace real Saber 11-Saber Pro), estu_estudiante (identificador del estudiante, su utilidad dependerá de si existe un identificador homologable en ambas bases).
+
+2. Características de la institución educativa: cole_area_ubicacion, cole_bilingue, cole_calendario, cole_jornada, cole_naturaleza — permiten estudiar desigualdades territoriales, exposición a idiomas, organización académica y diferencias entre colegios oficiales/no oficiales. Aquí se observa una primera dimensión: el contexto institucional de origen del estudiante.
+
+3. Características territoriales y sociodemográficas: estu_depto_reside, fami_estratovivienda, estu_inse_individual, fami_tieneinternet — capturan la dimensión territorial, el nivel socioeconómico (por estrato y por índice individual) y el acceso a recursos tecnológicos.
+
+4. Trayectoria académica previa: estu_repite — aproxima la trayectoria educativa previa del estudiante.
+
+5. Resultados académicos en Saber 11: punt_c_naturales, punt_ingles, punt_lectura_critica, punt_matematicas, punt_sociales_ciudadanas, punt_global, percentil_global — conservan el desempeño específico por área y el desempeño general, permitiendo estudiar qué dimensiones del rendimiento previo se relacionan con el desempeño posterior.
+
+Observaciones para la Etapa 2: periodo será clave para la dimensión temporal aunque no exista una variable idéntica en Saber Pro; estu_consecutivo y estu_estudiante son críticas para el emparejamiento y deben verificarse antes de asumir su uso; estu_inse_individual y fami_estratovivienda no deben considerarse automáticamente redundantes (índice vs. clasificación por estrato); punt_global y percentil_global son conceptualmente distintos (nivel absoluto vs. posición relativa); las cinco variables de puntaje por área son importantes porque permiten estudiar qué dimensiones específicas del rendimiento previo predicen el desempeño posterior, no solo el puntaje global.
+
+Con esto queda establecida la estructura conceptual de la selección de Saber 11. No haré todavía ninguna recomendación sobre Saber Pro.
+</pre>
+</details>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Intercambio 3 — Homologación y
+selección definitiva de variables de Saber Pro</span></p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span> Envío del listado
+completo de variables disponibles en Saber Pro (más de 130 variables,
+con su descripción y valores posibles), para que Gemini realizara la
+comparación, homologación y selección definitiva anunciada en la Etapa
+2.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+TODAS LAS VARIABLES DISPONIBLES EN SABER PRO: [listado completo del diccionario de variables de Saber Pro entregado por el estudiante, incluyendo periodo, estu_consecutivo, variables de identificación y documento, variables de preparación para el examen, variables de discapacidad y apoyos, variables geográficas (área, departamento y municipio de residencia y de presentación), variables sociodemográficas (género, etnia, estado civil, discapacidad), variables de institución de educación superior (nombre, carácter académico, origen, código, departamento y municipio), variables de programa académico (nombre, nivel, metodología, código SNIES, núcleo, semestre que cursa, porcentaje de créditos aprobados), variables de condiciones de permanencia (trabajo, horas trabajadas, forma de pago de matrícula, valor de la matrícula), variables familiares y del hogar (educación de los padres, estrato, ingresos, SISBEN, bienes del hogar, número de libros, personas a cargo) y variables de resultados de módulos de Saber Pro (comunicación escrita, competencias ciudadanas, inglés, lectura crítica, razonamiento cuantitativo: desempeño, percentiles y puntaje) junto con el puntaje y percentil global.]
+</pre>
+</details>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span> Gemini
+entregó una primera propuesta de 24 variables definitivas para
+<code>variables_objetivo</code> de Saber Pro, y al revisar que
+<code>punt_global</code> sustituía el bloque de desempeño específico
+discutido en la Etapa 1, propuso y recomendó una segunda versión
+(también de 24 variables) que sustituye variables menos prioritarias por
+<code>mod_lectura_critica_punt</code> e <code>mod_ingles_punt</code>,
+manteniendo identificación, contexto, trayectoria universitaria e
+indicadores de desempeño.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+Claro. Tomando la selección definitiva que acabamos de hacer, estas son 24 variables de Saber Pro que recomiendo conservar en variables_objetivo:
+
+variables_objetivo &lt;- c(
+  &quot;periodo&quot;,
+  &quot;estu_consecutivo&quot;,
+  &quot;estu_depto_reside&quot;,
+  &quot;estu_inse_individual&quot;,
+  &quot;fami_estratovivienda&quot;,
+  &quot;fami_tieneinternet&quot;,
+  &quot;estu_ano_examenestado_sb11&quot;,
+  &quot;estu_semestre_examenestadosb11&quot;,
+  &quot;estu_ano_terminobachiller&quot;,
+  &quot;estu_coddane_cole_termino&quot;,
+  &quot;estu_codicfescole_termino&quot;,
+  &quot;estu_areareside&quot;,
+  &quot;estu_mcpio_reside&quot;,
+  &quot;estu_inst_departamento&quot;,
+  &quot;estu_inst_municipio&quot;,
+  &quot;estu_nivel_prgm_academico&quot;,
+  &quot;estu_metodo_prgm&quot;,
+  &quot;estu_prgm_academico&quot;,
+  &quot;estu_snies_prgmacademico&quot;,
+  &quot;estu_nucleo_pregrado&quot;,
+  &quot;estu_semestrecursa&quot;,
+  &quot;estu_porcentajecreditosaprob&quot;,
+  &quot;inst_origen&quot;,
+  &quot;punt_global&quot;
+)
+
+Ojo: esta línea tiene exactamente 24 variables, pero al hacer el recuento veo que punt_global sustituye al bloque de desempeño específico que habíamos discutido. Para que las 24 representen mejor el objetivo longitudinal, preferiría incluir también mod_lectura_critica_punt, mod_ingles_punt y mod_razona_cuantitat_punt, eliminando algunas variables menos prioritarias.
+
+La versión más sólida metodológicamente de 24 sería esta:
+
+variables_objetivo &lt;- c(
+  &quot;periodo&quot;,
+  &quot;estu_consecutivo&quot;,
+  &quot;estu_depto_reside&quot;,
+  &quot;estu_inse_individual&quot;,
+  &quot;fami_estratovivienda&quot;,
+  &quot;fami_tieneinternet&quot;,
+  &quot;estu_ano_examenestado_sb11&quot;,
+  &quot;estu_semestre_examenestadosb11&quot;,
+  &quot;estu_ano_terminobachiller&quot;,
+  &quot;estu_coddane_cole_termino&quot;,
+  &quot;estu_codicfescole_termino&quot;,
+  &quot;estu_areareside&quot;,
+  &quot;estu_inst_departamento&quot;,
+  &quot;estu_inst_municipio&quot;,
+  &quot;estu_nivel_prgm_academico&quot;,
+  &quot;estu_metodo_prgm&quot;,
+  &quot;estu_snies_prgmacademico&quot;,
+  &quot;estu_nucleo_pregrado&quot;,
+  &quot;estu_semestrecursa&quot;,
+  &quot;estu_porcentajecreditosaprob&quot;,
+  &quot;inst_origen&quot;,
+  &quot;mod_lectura_critica_punt&quot;,
+  &quot;mod_ingles_punt&quot;,
+  &quot;punt_global&quot;
+)
+
+Esta segunda versión es la que yo utilizaría para tu base consolidada, porque conserva identificación, contexto, trayectoria universitaria e indicadores de desempeño.
+</pre>
+</details>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Verificación aplicada</span> <span class="bitacora-completar">[COMPLETAR]</span> — Indicar cómo se comprobó
+la selección final de 24 variables (ej. contraste contra el diccionario
+oficial del ICFES para confirmar que los nombres exactos existen en la
+base real, revisión de que ninguna quedara duplicada respecto a las de
+Saber 11).</p>
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Resultado</span> <span class="bitacora-completar">[COMPLETAR]</span> — ¿Se aceptó la segunda
+versión de 24 variables tal cual, se modificó la lista final, o se
+descartó algo? (Nota: esta selección es la que luego aparece citada en
+la Entrada 4 de la Fase de Control de Calidad, donde se mencionan las 62
+variables totales del panel — conviene indicar aquí si de este ejercicio
+surgieron las variables de Saber Pro que se sumaron a las de Saber
+11.)</p>
+</div>
+</div>
+<div class="bitacora-card">
+<h4>
+Entrada 9 — Homologación de variables de Saber 11 del período 20141
+</h4>
+<div class="bitacora-meta">
+Fecha: [COMPLETAR]  |  Etapa: Homologación histórica de nomenclatura +
+generación y depuración del script de renombrado (herramienta: Gemini)
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Objetivo</span> Incorporar el
+período 20141 de Saber 11 —excluido hasta el momento porque el ICFES
+cambió la nomenclatura de variables a partir de 20142— homologando sus
+nombres de columna a los ya usados en la base 20142–20252, y generar un
+script de R que automatizara ese renombrado al leer el archivo
+original.</p>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Intercambio 1 — Confirmación de
+las variables a homologar</span></p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span>
+<pre class="prompt-full">bien, ahora necesito hacer algo parecido. pero el contexto es este: desde el periodo 20142 en saber 11 es que cambiaron el nombre de las variables, es decir para mi estudio se me queda por fuera el periodo 20141. ya tengo la base de datos desde 20142 a 20252. falta solo incluir 20141. ya sabes cual es el nombre de mis variables de interes. tu mision sera buscar las equivalentes en los nombres de la 20141. primero confirmaras el nombre y que representa mis variables de interes. luego me pediras TODAS las variables disponibles de 20141 y buscaras el nombre equivalente</pre>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span> Gemini
+confirmó las 20 variables de referencia (con su significado) que debían
+buscarse en 20141, estableció el proceso en dos etapas (sin hacer
+todavía la homologación) y definió las categorías de correspondencia a
+usar (equivalente directa, equivalente con cambio de nombre,
+correspondencia parcial, sin equivalente), solicitando el listado
+completo de variables de 20141.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+Perfecto. Entiendo el problema: 20141 pertenece a Saber 11, pero utiliza una nomenclatura de variables anterior, mientras que tu base principal ya está homologada desde 20142 hasta 20252.
+
+El procedimiento será en dos etapas y no haré todavía ninguna equivalencia de 20141.
+
+Etapa 1 — Confirmar las variables que necesitas: tomo como referencia las 20 variables de interés ya definidas (periodo, estu_consecutivo, estu_estudiante, cole_area_ubicacion, cole_bilingue, cole_calendario, cole_jornada, cole_naturaleza, estu_depto_reside, estu_inse_individual, estu_repite, fami_estratovivienda, fami_tieneinternet, punt_c_naturales, punt_ingles, punt_lectura_critica, punt_matematicas, punt_sociales_ciudadanas, percentil_global, punt_global), con su descripción.
+
+Etapa 2 — Homologación de 20141: cuando se entregue el listado completo de variables de 20141, se comparará contra estas 20, determinando para cada una: variable actual → variable 20141 equivalente → qué representa → grado de correspondencia (equivalente directa: mismo concepto y misma unidad de información; equivalente con cambio de nombre: mismo concepto, nomenclatura diferente; correspondencia parcial: relacionada pero con diferencias en definición, población o escala; sin equivalente: no existe variable comparable). Se revisarán las definiciones, no solo los nombres.
+
+Resultado que se entregará: una tabla con columnas Variable actual 20142–20252 | Variable 20141 | Qué representa en 20141 | Correspondencia | Observación, y al final la línea de código específica para extraer las variables 20141 equivalentes.
+
+Se solicita el listado completo de variables disponibles en Saber 11 del período 20141, exactamente como aparece en esa base (nombre + descripción, y categorías cuando estén disponibles).
+</pre>
+</details>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Intercambio 2 — Primera versión
+del script de homologación</span></p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span>
+<pre class="prompt-full">ya tengo la base de ddatos con las 16 variables, ahora necesito que los nombres ya no sean solo equivalentes sino exactamente iguales para poder unirlos a mi base de datos. necesito generar un codigo de Rstudio que me pida la base de datos de 20141 como ruta de acceso y me renombre las variables equivalentes a exactamente. confirma que entiendes el objetivo del codigo y entregame el Rscript para hacer eso</pre>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span> Primera
+versión del script: solicita la ruta con <code>file.choose()</code>,
+intenta leer el archivo como CSV (con reintento con separador
+<code>;</code> si detecta una sola columna), valida que existan las 16
+variables esperadas, renombra las tres variables con nombre histórico
+distinto (<code>punt_lenguaje → punt_lectura_critica</code>,
+<code>punt_ciencias_sociales → punt_sociales_ciudadanas</code>,
+<code>recaf_punt_c_naturales → punt_c_naturales</code>) y guarda el
+resultado con <code>write_csv()</code>.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+# ============================================================
+# HOMOLOGACIÓN DE VARIABLES SABER 11 - PERIODO 20141
+# Objetivo: renombrar las variables de 20141 para que tengan
+# exactamente los mismos nombres usados en la base 20142-20252.
+# ============================================================
+
+library(readr)
+library(dplyr)
+
+cat(&quot;Selecciona la base de datos de Saber 11 correspondiente al periodo 20141.\n&quot;)
+ruta_20141 &lt;- file.choose()
+
+base_20141 &lt;- tryCatch(
+  {
+    read_csv(ruta_20141, show_col_types = FALSE, progress = FALSE)
+  },
+  error = function(e) {
+    message(&quot;No fue posible leer el archivo con separador coma. Intentando con separador punto y coma...&quot;)
+    read_csv2(ruta_20141, show_col_types = FALSE, progress = FALSE)
+  }
+)
+
+variables_20141 &lt;- c(
+  &quot;periodo&quot;, &quot;estu_consecutivo&quot;, &quot;estu_estudiante&quot;,
+  &quot;cole_area_ubicacion&quot;, &quot;cole_bilingue&quot;, &quot;cole_calendario&quot;, &quot;cole_jornada&quot;, &quot;cole_naturaleza&quot;,
+  &quot;estu_depto_reside&quot;, &quot;fami_estratovivienda&quot;, &quot;fami_tieneinternet&quot;,
+  &quot;punt_ingles&quot;, &quot;punt_lenguaje&quot;, &quot;punt_matematicas&quot;, &quot;punt_ciencias_sociales&quot;, &quot;recaf_punt_c_naturales&quot;
+)
+
+faltantes &lt;- setdiff(variables_20141, names(base_20141))
+if (length(faltantes) &gt; 0) {
+  print(faltantes)
+  stop(&quot;El proceso se detuvo para evitar una homologación incompleta.&quot;)
+}
+
+base_20141 &lt;- base_20141 %&gt;%
+  rename(
+    punt_lectura_critica = punt_lenguaje,
+    punt_sociales_ciudadanas = punt_ciencias_sociales,
+    punt_c_naturales = recaf_punt_c_naturales
+  )
+
+variables_finales &lt;- c(
+  &quot;periodo&quot;, &quot;estu_consecutivo&quot;, &quot;estu_estudiante&quot;,
+  &quot;cole_area_ubicacion&quot;, &quot;cole_bilingue&quot;, &quot;cole_calendario&quot;, &quot;cole_jornada&quot;, &quot;cole_naturaleza&quot;,
+  &quot;estu_depto_reside&quot;, &quot;fami_estratovivienda&quot;, &quot;fami_tieneinternet&quot;,
+  &quot;punt_c_naturales&quot;, &quot;punt_ingles&quot;, &quot;punt_lectura_critica&quot;, &quot;punt_matematicas&quot;, &quot;punt_sociales_ciudadanas&quot;
+)
+
+faltantes_finales &lt;- setdiff(variables_finales, names(base_20141))
+if (length(faltantes_finales) &gt; 0) {
+  print(faltantes_finales)
+  stop(&quot;El proceso se detuvo porque las variables no quedaron homologadas correctamente.&quot;)
+}
+
+tabla_homologacion &lt;- data.frame(
+  Variable_20141 = c(&quot;periodo&quot;,&quot;estu_consecutivo&quot;,&quot;estu_estudiante&quot;,&quot;cole_area_ubicacion&quot;,&quot;cole_bilingue&quot;,
+                      &quot;cole_calendario&quot;,&quot;cole_jornada&quot;,&quot;cole_naturaleza&quot;,&quot;estu_depto_reside&quot;,
+                      &quot;fami_estratovivienda&quot;,&quot;fami_tieneinternet&quot;,&quot;punt_ingles&quot;,&quot;punt_lenguaje&quot;,
+                      &quot;punt_matematicas&quot;,&quot;punt_ciencias_sociales&quot;,&quot;recaf_punt_c_naturales&quot;),
+  Variable_homologada = c(&quot;periodo&quot;,&quot;estu_consecutivo&quot;,&quot;estu_estudiante&quot;,&quot;cole_area_ubicacion&quot;,&quot;cole_bilingue&quot;,
+                           &quot;cole_calendario&quot;,&quot;cole_jornada&quot;,&quot;cole_naturaleza&quot;,&quot;estu_depto_reside&quot;,
+                           &quot;fami_estratovivienda&quot;,&quot;fami_tieneinternet&quot;,&quot;punt_ingles&quot;,&quot;punt_lectura_critica&quot;,
+                           &quot;punt_matematicas&quot;,&quot;punt_sociales_ciudadanas&quot;,&quot;punt_c_naturales&quot;)
+)
+print(tabla_homologacion, row.names = FALSE)
+
+ruta_guardado &lt;- file.choose(new = TRUE)
+write_csv(base_20141, ruta_guardado)
+</pre>
+</details>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Intercambio 3 — Corrección tras
+error de lectura del archivo</span></p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span>
+<pre class="prompt-full">el codigo lee mal la base de datos ya que esas variables si las tiene. este es el error que me sale :
+============================================
+ERROR: FALTAN VARIABLES EN LA BASE 20141
+============================================
+No se encontraron las siguientes variables:
+ [1] &quot;periodo&quot; &quot;estu_consecutivo&quot; &quot;estu_estudiante&quot; &quot;cole_area_ubicacion&quot;
+ [5] &quot;cole_bilingue&quot; &quot;cole_calendario&quot; &quot;cole_jornada&quot; &quot;cole_naturaleza&quot;
+ [9] &quot;estu_depto_reside&quot; &quot;fami_estratovivienda&quot; &quot;fami_tieneinternet&quot; &quot;punt_ingles&quot;
+[13] &quot;punt_lenguaje&quot; &quot;punt_matematicas&quot; &quot;punt_ciencias_sociales&quot; &quot;recaf_punt_c_naturales&quot;</pre>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span>
+Diagnóstico: el problema estaba en la lectura, no en la homologación —
+si la base 20141 era Excel o tenía separador/codificación distinta,
+<code>read_csv()</code> podía interpretar mal los encabezados. Segunda
+versión del script: detecta automáticamente la extensión (.xlsx/.xls con
+<code>read_excel()</code>, .csv probando <code>,</code> y luego
+<code>;</code>, .txt/.dat con tabulación), limpia espacios y caracteres
+BOM de los nombres de columnas, imprime los nombres detectados antes de
+validar, y solo entonces homologa y exporta las 16 variables.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+# ============================================================
+# HOMOLOGACIÓN SABER 11 - PERIODO 20141
+# ============================================================
+
+library(dplyr); library(readr); library(readxl); library(stringr)
+
+cat(&quot;Selecciona la base de datos Saber 11 correspondiente a 20141.\n\n&quot;)
+ruta_20141 &lt;- file.choose()
+
+extension &lt;- tolower(tools::file_ext(ruta_20141))
+cat(&quot;Tipo de archivo detectado:&quot;, extension, &quot;\n\n&quot;)
+
+if (extension %in% c(&quot;xlsx&quot;, &quot;xls&quot;)) {
+  base_20141 &lt;- read_excel(ruta_20141)
+} else if (extension == &quot;csv&quot;) {
+  base_20141 &lt;- read_delim(ruta_20141, delim = &quot;,&quot;, locale = locale(encoding = &quot;UTF-8&quot;),
+                            show_col_types = FALSE, progress = FALSE)
+  if (ncol(base_20141) == 1) {
+    base_20141 &lt;- read_delim(ruta_20141, delim = &quot;;&quot;, locale = locale(encoding = &quot;UTF-8&quot;),
+                              show_col_types = FALSE, progress = FALSE)
+  }
+} else if (extension %in% c(&quot;txt&quot;, &quot;dat&quot;)) {
+  base_20141 &lt;- read_delim(ruta_20141, delim = &quot;\t&quot;, locale = locale(encoding = &quot;UTF-8&quot;),
+                            show_col_types = FALSE, progress = FALSE)
+} else {
+  stop(paste0(&quot;Formato de archivo no reconocido: .&quot;, extension,
+              &quot;\nSelecciona un archivo .xlsx, .xls, .csv, .txt o .dat.&quot;))
+}
+
+# Limpiar nombres de columnas (espacios y BOM)
+names(base_20141) &lt;- names(base_20141) %&gt;% str_replace_all(&quot;\ufeff&quot;, &quot;&quot;) %&gt;% str_trim()
+
+cat(&quot;Número de columnas detectadas:&quot;, ncol(base_20141), &quot;\n&quot;)
+print(names(base_20141))
+
+variables_20141 &lt;- c(&quot;periodo&quot;,&quot;estu_consecutivo&quot;,&quot;estu_estudiante&quot;,&quot;cole_area_ubicacion&quot;,&quot;cole_bilingue&quot;,
+                      &quot;cole_calendario&quot;,&quot;cole_jornada&quot;,&quot;cole_naturaleza&quot;,&quot;estu_depto_reside&quot;,
+                      &quot;fami_estratovivienda&quot;,&quot;fami_tieneinternet&quot;,&quot;punt_ingles&quot;,&quot;punt_lenguaje&quot;,
+                      &quot;punt_matematicas&quot;,&quot;punt_ciencias_sociales&quot;,&quot;recaf_punt_c_naturales&quot;)
+
+faltantes &lt;- setdiff(variables_20141, names(base_20141))
+if (length(faltantes) &gt; 0) {
+  print(faltantes)
+  stop(&quot;El proceso se detuvo para evitar modificar incorrectamente la base.&quot;)
+}
+
+base_20141 &lt;- base_20141 %&gt;%
+  rename(
+    punt_lectura_critica = punt_lenguaje,
+    punt_sociales_ciudadanas = punt_ciencias_sociales,
+    punt_c_naturales = recaf_punt_c_naturales
+  )
+
+variables_finales &lt;- c(&quot;periodo&quot;,&quot;estu_consecutivo&quot;,&quot;estu_estudiante&quot;,&quot;cole_area_ubicacion&quot;,&quot;cole_bilingue&quot;,
+                        &quot;cole_calendario&quot;,&quot;cole_jornada&quot;,&quot;cole_naturaleza&quot;,&quot;estu_depto_reside&quot;,
+                        &quot;fami_estratovivienda&quot;,&quot;fami_tieneinternet&quot;,&quot;punt_c_naturales&quot;,&quot;punt_ingles&quot;,
+                        &quot;punt_lectura_critica&quot;,&quot;punt_matematicas&quot;,&quot;punt_sociales_ciudadanas&quot;)
+
+faltantes_finales &lt;- setdiff(variables_finales, names(base_20141))
+if (length(faltantes_finales) &gt; 0) {
+  stop(paste(&quot;La homologación no se completó. Faltan:&quot;, paste(faltantes_finales, collapse = &quot;, &quot;)))
+}
+
+base_20141_homologada &lt;- base_20141 %&gt;% select(all_of(variables_finales))
+
+ruta_guardado &lt;- file.path(dirname(ruta_20141), &quot;Saber11_20141_homologada.csv&quot;)
+write_csv(base_20141_homologada, ruta_guardado)
+
+cat(&quot;Número de registros:&quot;, nrow(base_20141_homologada), &quot;\n&quot;)
+cat(&quot;Número de variables:&quot;, ncol(base_20141_homologada), &quot;\n&quot;)
+</pre>
+</details>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Verificación aplicada</span> Se
+ejecutó la primera versión del script en RStudio, lo que arrojó el error
+“FALTAN VARIABLES EN LA BASE 20141” pese a que las variables sí existían
+en el archivo original — evidencia de que <code>read_csv()</code> estaba
+interpretando mal los encabezados (probable formato Excel o separador
+distinto). Ese mensaje de error se usó como insumo para solicitar la
+corrección.</p>
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Resultado</span> Aceptado con
+corrección: la primera versión del script fue rechazada por fallar en la
+lectura del archivo; la segunda versión (con detección automática de
+formato y limpieza de nombres de columnas) sí completó la homologación
+correctamente — confirmado en la interacción siguiente, donde se indica
+que ya se cuenta con “la base completa de Saber 11”.</p>
+</div>
+</div>
+<div class="bitacora-card">
+<h4>
+Entrada 10 — Plan de homologación de nomenclatura de Saber Pro
+(2014–2020 vs. 2021–2024)
+</h4>
+<div class="bitacora-meta">
+Fecha: [COMPLETAR]  |  Etapa: Definición de metodología para un cambio
+de nomenclatura análogo en Saber Pro (herramienta: Gemini)
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Objetivo</span> Establecer el
+procedimiento a seguir para homologar los nombres de las variables de
+interés de Saber Pro entre los períodos 2014–2020 y 2021–2024, ya que el
+ICFES también cambió la nomenclatura de variables en esta prueba
+(problema análogo al resuelto para Saber 11 20141 en la Entrada 9).</p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span>
+<pre class="prompt-full">listo ya tengo la base completa de saber 11. ahora vamos a la de saber pro. en saber pro tenemos el mismo problema de que de 2014 a 2020 las variables tenian un nombre y de 2021 a 2024 otra. ya elegimos nuestras variables para el periodo 2014 a 2024. te las volvere a mandar. una vez las tengas presente te mandare todas las posibles del periodo 2021 a 2024 y ded ahi vas a elegir las variables que se asemejen ysignifiquen lo mismo y me diras cuales son los nuevos nombres. confirma que entiendes esta mision</pre>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span> Gemini
+confirmó la misión y definió el procedimiento en pasos: recibir de nuevo
+la lista definitiva de variables 2014–2020 como estructura de
+referencia, documentar cada una (nombre, qué representa, dimensión,
+utilidad), recibir el listado completo de variables 2021–2024, comparar
+por significado (no solo por nombre) y clasificar cada caso como
+equivalencia directa, cambio de nombre, similar pero no equivalente, o
+variable desaparecida/redefinida, entregando al final una tabla
+comparativa y el vector <code>variables_2021_2024</code> en R con los
+nombres exactos.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+Sí, entiendo perfectamente la misión.
+
+Trabajaremos con Saber Pro 2014–2024, pero debido al cambio de nomenclatura entre períodos, vamos a hacer una homologación específica para que toda la base quede con un único conjunto de nombres de variables.
+
+El procedimiento será:
+1. Me vuelves a enviar la lista definitiva de variables de interés de Saber Pro 2014–2020, que será nuestra estructura de referencia.
+2. La tomaré como definitiva y registraré para cada variable: nombre actual, qué representa, dimensión a la que pertenece, utilidad dentro del análisis.
+3. Después me enviarás TODAS las variables disponibles de Saber Pro 2021–2024, incluyendo sus descripciones.
+4. Compararé el significado, no solamente el nombre, buscando: equivalencia directa; misma variable con nombre diferente; variable conceptualmente similar pero no equivalente; variables que ya no existan o hayan cambiado de definición.
+5. Te entregaré una tabla: Variable 2014–2020 | Nueva variable 2021–2024 | Qué representa | Correspondencia | Observación.
+6. Finalmente, te entregaré el vector variables_2021_2024 en R, con los nombres exactos de 2021–2024, listo para homologar y unir con la base 2014–2020.
+
+Muy importante: no asumiré equivalencia solo porque dos nombres se parezcan. Revisaremos la definición, población, momento de medición y contenido de cada variable.
+
+Envíame primero nuevamente las variables definitivas de Saber Pro 2014–2020.
+</pre>
+</details>
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Verificación aplicada</span> No
+aplica en este intercambio: se trata únicamente de la confirmación del
+procedimiento a seguir, sin ejecución de código ni generación de una
+respuesta técnica verificable todavía.</p>
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Resultado</span> Aceptado: se
+estableció el procedimiento de dos etapas para la homologación de Saber
+Pro 2014–2020 vs. 2021–2024, a ejecutarse en una interacción
+posterior.</p>
+</div>
+</div>
+</div>
 <div id="fase-arquitectura" class="section level2">
 <h2>Fase: Arquitectura</h2>
 <div class="bitacora-card">
@@ -575,10 +1181,204 @@ se proporcionara la ruta.</p>
 <pre class="prompt-full">ya yo tengo las bases unidas de saber pro, saber 11, y cruces. asi que solo seria poner 3 rutas de acceso. ademas quiero que el codigo sin impoprtar el formato en el que copio la ruta de acceso, ya sea txt o cvs. solo use cvs, es decir si pongo una ruta txt el mismo codigo la convierta en cvs y continue. añade estas mejoras al codigo y mandame el script de R listo para copiar y pegar</pre>
 </div>
 <div class="bitacora-field">
-<p><span class="bitacora-field-label">Respuesta obtenida</span> Bloque
-de código optimizado que reemplaza los lazos complejos por tres rutas
-centralizadas e incluye una rutina de sustitución de cadenas
-(<code>gsub()</code>) para normalizar extensiones de archivo.</p>
+<span class="bitacora-field-label">Respuesta obtenida</span> Script
+completo reestructurado en torno a 3 rutas centralizadas
+(<code>ruta_cruce</code>, <code>ruta_saber11</code>,
+<code>ruta_saberpro</code>) y una función
+<code>convertir_a_csv_si_es_txt()</code> que detecta la extensión del
+archivo, lo lee con codificación robusta (UTF-8/Latin-1) y, si no es
+<code>.csv</code>, genera una copia en ese formato y continúa el flujo
+sobre ella. Incluye además funciones auxiliares de normalización de
+texto, extracción de año/semestre, homologación de columnas por nombre y
+cálculo de estadísticas descriptivas, y arma la base longitudinal
+completa con auditoría, tablas resumen y exportación a CSV/Excel.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+# ============================================================
+# PROYECTO: BASE LONGITUDINAL SABER 11 - SABER PRO (ICFES)
+# AUTOR: PROCESAMIENTO AUTOMATIZADO, AUDITABLE Y AUTO-CONVERTIDOR
+# ============================================================
+
+paquetes_requeridos &lt;- c(&quot;data.table&quot;, &quot;dplyr&quot;, &quot;stringr&quot;, &quot;purrr&quot;, &quot;readr&quot;, &quot;openxlsx&quot;, &quot;tools&quot;)
+paquetes_faltantes  &lt;- paquetes_requeridos[!(paquetes_requeridos %in% installed.packages()[,&quot;Package&quot;])]
+if (length(paquetes_faltantes) &gt; 0) install.packages(paquetes_faltantes, dependencies = TRUE)
+
+suppressPackageStartupMessages({
+  library(data.table); library(dplyr); library(stringr); library(purrr)
+  library(readr); library(openxlsx); library(tools)
+})
+
+# ============================================================
+# 1. CONFIGURACIÓN DEL PROYECTO (MODIFICABLE POR EL USUARIO)
+# ============================================================
+ruta_cruce    &lt;- &quot;ruta/a/tu/base_consolidada_cruces.txt&quot;
+ruta_saber11  &lt;- &quot;ruta/a/tu/base_consolidada_saber11.csv&quot;
+ruta_saberpro &lt;- &quot;ruta/a/tu/base_consolidada_saberpro.txt&quot;
+
+variables_saber11 &lt;- c(&quot;estu_consecutivo&quot;,&quot;periodo&quot;,&quot;cole_depto_ubicacion&quot;,&quot;cole_naturaleza&quot;,&quot;estu_genero&quot;,
+  &quot;fami_estrato_vivienda&quot;,&quot;punt_c_naturales&quot;,&quot;punt_ingles&quot;,&quot;punt_lectura_critica&quot;,&quot;punt_matematicas&quot;,
+  &quot;punt_sociales_ciudadanas&quot;,&quot;punt_global&quot;,&quot;percentil_global&quot;)
+
+variables_saberpro &lt;- c(&quot;estu_consecutivo&quot;,&quot;periodo&quot;,&quot;inst_depto_ubicacion&quot;,&quot;inst_nombre_institucion&quot;,
+  &quot;estu_nivel_codigo&quot;,&quot;estu_metodo_prg&quot;,&quot;estu_prg_academico&quot;,&quot;mod_comuni_escrita_punt&quot;,
+  &quot;mod_competen_ciudada_punt&quot;,&quot;mod_ingles_punt&quot;,&quot;mod_lectura_critica_punt&quot;,&quot;mod_razona_cuantitat_punt&quot;,
+  &quot;punt_global&quot;,&quot;percentil_global&quot;)
+
+prefijo_saber11  &lt;- &quot;S11_&quot;
+prefijo_saberpro &lt;- &quot;SP_&quot;
+
+orden_variables_final &lt;- c(&quot;estu_consecutivo_sb11&quot;,&quot;periodo_sb11&quot;,&quot;S11_cole_depto_ubicacion&quot;,&quot;S11_cole_naturaleza&quot;,
+  &quot;S11_estu_genero&quot;,&quot;S11_fami_estrato_vivienda&quot;,&quot;S11_punt_c_naturales&quot;,&quot;S11_punt_ingles&quot;,
+  &quot;S11_punt_lectura_critica&quot;,&quot;S11_punt_matematicas&quot;,&quot;S11_punt_sociales_ciudadanas&quot;,&quot;S11_punt_global&quot;,
+  &quot;S11_percentil_global&quot;,&quot;rezago_semestres&quot;,&quot;trayectoria_valida_temporal&quot;,&quot;estu_consecutivo_sbpro&quot;,
+  &quot;periodo_sbpro&quot;,&quot;SP_inst_depto_ubicacion&quot;,&quot;SP_inst_nombre_institucion&quot;,&quot;SP_estu_nivel_codigo&quot;,
+  &quot;SP_estu_metodo_prg&quot;,&quot;SP_estu_prg_academico&quot;,&quot;SP_mod_comuni_escrita_punt&quot;,&quot;SP_mod_competen_ciudada_punt&quot;,
+  &quot;SP_mod_ingles_punt&quot;,&quot;SP_mod_lectura_critica_punt&quot;,&quot;SP_mod_razona_cuantitat_punt&quot;,&quot;SP_punt_global&quot;,
+  &quot;SP_percentil_global&quot;)
+
+directorio_salida    &lt;- &quot;Resultados_Saber11_SaberPro&quot;
+anios_validos_s11    &lt;- 2015:2025
+anios_validos_spro   &lt;- 2014:2024
+anios_validos_cruces &lt;- 2014:2024
+
+# ============================================================
+# 2. FUNCIONES AUXILIARES Y CONVERSIÓN AUTO-CSV
+# ============================================================
+convertir_a_csv_si_es_txt &lt;- function(ruta_archivo) {
+  if (!file.exists(ruta_archivo)) stop(sprintf(&quot;ERROR CRÍTICO: El archivo no existe: %s&quot;, ruta_archivo))
+  extension &lt;- tolower(tools::file_ext(ruta_archivo))
+  if (extension != &quot;csv&quot;) {
+    ruta_csv_salida &lt;- sub(&quot;\\.[^.]+$&quot;, &quot;.csv&quot;, ruta_archivo)
+    df_temp &lt;- tryCatch({
+      data.table::fread(file = ruta_archivo, colClasses = &quot;character&quot;, encoding = &quot;UTF-8&quot;,
+                         strip.white = TRUE, fill = TRUE, showProgress = TRUE)
+    }, error = function(e) {
+      data.table::fread(file = ruta_archivo, colClasses = &quot;character&quot;, encoding = &quot;Latin-1&quot;,
+                         strip.white = TRUE, fill = TRUE, showProgress = TRUE)
+    })
+    data.table::fwrite(df_temp, file = ruta_csv_salida, sep = &quot;,&quot;, bom = TRUE)
+    return(ruta_csv_salida)
+  } else {
+    return(ruta_archivo)
+  }
+}
+
+normalizar_texto &lt;- function(x) {
+  x &lt;- as.character(x); x &lt;- iconv(x, to = &quot;ASCII//TRANSLIT&quot;); x &lt;- tolower(x)
+  x &lt;- gsub(&quot;[^a-z0-9_]&quot;, &quot;_&quot;, x); x &lt;- gsub(&quot;_+&quot;, &quot;_&quot;, x); x &lt;- gsub(&quot;^_+|_+$&quot;, &quot;&quot;, x)
+  return(x)
+}
+
+extraer_anio &lt;- function(periodo) {
+  p_clean &lt;- gsub(&quot;[^0-9]&quot;, &quot;&quot;, as.character(periodo))
+  as.numeric(substr(p_clean, 1, 4))
+}
+
+calcular_indice_semestre &lt;- function(periodo) {
+  p_clean &lt;- gsub(&quot;[^0-9]&quot;, &quot;&quot;, as.character(periodo))
+  if (nchar(p_clean) &lt; 5) return(rep(NA_real_, length(periodo)))
+  anio &lt;- as.numeric(substr(p_clean, 1, 4)); sem &lt;- as.numeric(substr(p_clean, 5, 5))
+  ifelse(is.na(anio) | is.na(sem), NA_real_, (anio * 2) + ifelse(sem &gt;= 2, 2, 1))
+}
+
+leer_csv_icfes &lt;- function(ruta_csv) {
+  df &lt;- tryCatch({
+    data.table::fread(file = ruta_csv, colClasses = &quot;character&quot;, encoding = &quot;UTF-8&quot;,
+                       strip.white = TRUE, blank.lines.skip = TRUE, fill = TRUE, showProgress = FALSE)
+  }, error = function(e) {
+    data.table::fread(file = ruta_csv, colClasses = &quot;character&quot;, encoding = &quot;Latin-1&quot;,
+                       strip.white = TRUE, blank.lines.skip = TRUE, fill = TRUE, showProgress = FALSE)
+  })
+  df &lt;- as.data.frame(df, stringsAsFactors = FALSE)
+  df[] &lt;- lapply(df, function(col) {
+    col &lt;- trimws(col); col[col %in% c(&quot;&quot;, &quot;NA&quot;, &quot;null&quot;, &quot;NULL&quot;, &quot;N/A&quot;, &quot;.&quot;)] &lt;- NA; col
+  })
+  return(df)
+}
+
+homologar_mapeo_columnas &lt;- function(df_cols, vars_deseadas) {
+  norm_df_cols &lt;- normalizar_texto(df_cols); norm_vars &lt;- normalizar_texto(vars_deseadas)
+  mapa &lt;- character(0)
+  for (i in seq_along(vars_deseadas)) {
+    pos &lt;- which(norm_df_cols == norm_vars[i])
+    if (length(pos) &gt; 0) mapa[vars_deseadas[i]] &lt;- df_cols[pos[1]]
+  }
+  return(mapa)
+}
+
+calcular_stats_num &lt;- function(vector_datos, nombre_var) {
+  v_num &lt;- suppressWarnings(as.numeric(vector_datos)); n_tot &lt;- length(v_num); n_na &lt;- sum(is.na(v_num))
+  v_clean &lt;- v_num[!is.na(v_num)]
+  if (length(v_clean) == 0) {
+    return(data.frame(Variable = nombre_var, N = n_tot, NAs = n_na, Media = NA, Mediana = NA,
+                       DE = NA, Min = NA, Q1 = NA, Q3 = NA, Max = NA, stringsAsFactors = FALSE))
+  }
+  qs &lt;- quantile(v_clean, probs = c(0.25, 0.75))
+  data.frame(Variable = nombre_var, N = n_tot, NAs = n_na, Media = round(mean(v_clean), 2),
+             Mediana = round(median(v_clean), 2), DE = round(sd(v_clean), 2), Min = round(min(v_clean), 2),
+             Q1 = round(qs[1], 2), Q3 = round(qs[2], 2), Max = round(max(v_clean), 2), stringsAsFactors = FALSE)
+}
+
+# ============================================================
+# 3. CONVERSIÓN AUTOMÁTICA DE FORMATO Y CARGA DE LAS 3 BASES
+# ============================================================
+ruta_cruce_csv    &lt;- convertir_a_csv_si_es_txt(ruta_cruce)
+ruta_saber11_csv  &lt;- convertir_a_csv_si_es_txt(ruta_saber11)
+ruta_saberpro_csv &lt;- convertir_a_csv_si_es_txt(ruta_saberpro)
+
+vars_cruce_requeridas &lt;- c(&quot;estu_consecutivo_sb11&quot;, &quot;periodo_sb11&quot;, &quot;estu_consecutivo_sbpro&quot;, &quot;periodo_sbpro&quot;)
+df_cruce_raw &lt;- leer_csv_icfes(ruta_cruce_csv)
+reg_iniciales_cruces &lt;- nrow(df_cruce_raw)
+mapa_cruce &lt;- homologar_mapeo_columnas(colnames(df_cruce_raw), vars_cruce_requeridas)
+if (length(mapa_cruce) &lt; length(vars_cruce_requeridas)) {
+  stop(sprintf(&quot;ERROR CRÍTICO: faltan variables en cruce: %s&quot;,
+               paste(setdiff(vars_cruce_requeridas, names(mapa_cruce)), collapse = &quot;, &quot;)))
+}
+tabla_maestra_cruces &lt;- df_cruce_raw[, mapa_cruce[vars_cruce_requeridas]]
+colnames(tabla_maestra_cruces) &lt;- vars_cruce_requeridas
+tabla_maestra_cruces &lt;- tabla_maestra_cruces %&gt;%
+  distinct() %&gt;%
+  filter(!is.na(estu_consecutivo_sb11) &amp; !is.na(estu_consecutivo_sbpro)) %&gt;%
+  mutate(anio_s11 = extraer_anio(periodo_sb11), anio_spro = extraer_anio(periodo_sbpro)) %&gt;%
+  filter(is.na(anio_s11) | anio_s11 %in% anios_validos_cruces,
+         is.na(anio_spro) | anio_spro %in% anios_validos_cruces) %&gt;%
+  select(all_of(vars_cruce_requeridas))
+
+# ============================================================
+# 4-5. CARGA, HOMOLOGACIÓN Y DEDUPLICACIÓN DE SABER 11 Y SABER PRO
+#      (auditoría de duplicados exactos y por ID-período,
+#      retención del primer registro con group_by()+slice(1),
+#      renombrado con prefijo S11_/SP_)
+# ============================================================
+# [ver detalle completo de esta sección en la Entrada 3, donde
+#  se reporta y corrige el bloqueo de este mismo bloque]
+
+# ============================================================
+# 6. BASE LONGITUDINAL: left_join() cruce -&gt; Saber 11 -&gt; Saber Pro,
+#    cálculo de rezago_semestres y trayectoria_valida_temporal,
+#    reordenamiento según orden_variables_final
+# ============================================================
+
+# ============================================================
+# 7. CONTROL DE CALIDAD: tabla_control_cruces con 12 métricas
+#    (registros iniciales, cruces válidos, matches con S11/SPro,
+#    trayectorias completas, inconsistencias temporales, duplicados)
+# ============================================================
+
+# ============================================================
+# 8. ESTADÍSTICA DESCRIPTIVA Y TABLAS RESUMEN (por período,
+#    departamento, género, estrato, IES, programa académico)
+# ============================================================
+
+# ============================================================
+# 9. EXPORTACIÓN AUTOMÁTICA: CSV por tabla + libro Excel
+#    multihoja (Reporte_Ejecutivo_Saber11_SaberPro.xlsx)
+# ============================================================
+</pre>
+</details>
 </div>
 <div class="bitacora-field">
 <p><span class="bitacora-field-label">Verificación aplicada</span> Se
@@ -590,6 +1390,131 @@ como <code>.csv</code> sin detener la consola.</p>
 <p><span class="bitacora-field-label">Resultado</span> Aceptado: la
 automatización funcionó correctamente y simplificó la carga de las
 matrices masivas.</p>
+</div>
+</div>
+<div class="bitacora-card">
+<h4>
+Entrada 11 — Limpieza y consolidación de las bases oficiales de cruce
+ICFES
+</h4>
+<div class="bitacora-meta">
+Fecha: [COMPLETAR]  |  Etapa: Arquitectura — construcción del script de
+emparejamiento oficial Saber 11–Saber Pro (herramienta: Gemini)
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Objetivo</span> Construir un
+script de R robusto que leyera múltiples archivos oficiales de cruce
+publicados por el ICFES (que ya contienen el emparejamiento
+estu_consecutivo_sb11 / periodo_sb11 / estu_consecutivo_sbpro /
+periodo_sbpro), los unificara, filtrara únicamente los registros cuyo
+período en ambas pruebas cumpliera el rango establecido del estudio, y
+generara una única base consolidada de estudiantes válidos.</p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span>
+<pre class="prompt-full">ok en la pagina del icfes hay bases de datos donde ellos mismos establecen que estudiantes son los mismos. nuestra labor va ser limpiar dichas bases de datos ya que son varias, para ello haremos un codigo de R robusto donde me pida las bases de datos de los cruces. y este codigo filtre por quienes cumplen el rango establecidos, para no enredarnos todos los 2014 y todos los 2025 sirven. te pasare una linea de las bases de datos a analizar estu_consecutivo_sb11;periodo_sb11;estu_consecutivo_sbpro;periodo_sbpro
+SB1120012011642657;20012;EK201210000004;20121. asi son presentados los datos. el codigo debe solo quedarse con aquellos estudiantes que en ambos periodos cumplan con la restriccion. debe entregarme una base de datos unificada donde solo tenga dichos estudiantes</pre>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span> Script
+basado en <code>data.table</code> que permite seleccionar varios
+archivos de cruce a la vez (<code>choose.files(multi = TRUE)</code>),
+los lee con <code>fread()</code>, valida que cada uno tenga las 4
+columnas requeridas, los unifica con <code>rbindlist()</code>, valida el
+formato de período con expresiones regulares, filtra por el rango
+20141–20252 en ambas pruebas, elimina duplicados, calcula año/semestre y
+un <code>rezago_semestres</code>, descarta registros con rezago negativo
+o nulo (Saber Pro debe ser posterior a Saber 11), ordena la base y la
+exporta como CSV separado por <code>;</code>.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+# ============================================================
+# LIMPIEZA Y CONSOLIDACIÓN DE BASES DE CRUCE
+# SABER 11 - SABER PRO
+# ============================================================
+
+library(data.table)
+
+cat(&quot;Selecciona TODAS las bases de cruce del ICFES que deseas procesar.\n&quot;)
+archivos &lt;- choose.files(caption = &quot;Selecciona las bases de cruce Saber 11 - Saber Pro&quot;, multi = TRUE)
+if (length(archivos) == 0) stop(&quot;No seleccionaste ningún archivo.&quot;)
+
+leer_cruce &lt;- function(ruta) {
+  datos &lt;- fread(ruta, encoding = &quot;UTF-8&quot;, sep = &quot;auto&quot;, header = TRUE,
+                  check.names = FALSE, strip.white = TRUE)
+  setnames(datos, trimws(names(datos)))
+  return(datos)
+}
+
+lista_bases &lt;- lapply(archivos, leer_cruce)
+
+variables_requeridas &lt;- c(&quot;estu_consecutivo_sb11&quot;, &quot;periodo_sb11&quot;, &quot;estu_consecutivo_sbpro&quot;, &quot;periodo_sbpro&quot;)
+for (i in seq_along(lista_bases)) {
+  faltantes &lt;- setdiff(variables_requeridas, names(lista_bases[[i]]))
+  if (length(faltantes) &gt; 0) {
+    stop(paste0(&quot;El archivo &#39;&quot;, basename(archivos[i]), &quot;&#39; no contiene: &quot;, paste(faltantes, collapse = &quot;, &quot;)))
+  }
+}
+
+cruce_completo &lt;- rbindlist(lista_bases, use.names = TRUE, fill = TRUE)
+
+cruce_completo[, periodo_sb11 := trimws(as.character(periodo_sb11))]
+cruce_completo[, periodo_sbpro := trimws(as.character(periodo_sbpro))]
+
+validar_sb11 &lt;- grepl(&quot;^(19|20)[0-9]{2}[12]$&quot;, cruce_completo$periodo_sb11)
+validar_sbpro &lt;- grepl(&quot;^(19|20)[0-9]{2}[12]$&quot;, cruce_completo$periodo_sbpro)
+
+cruce_completo[, periodo_sb11_num := suppressWarnings(as.integer(periodo_sb11))]
+cruce_completo[, periodo_sbpro_num := suppressWarnings(as.integer(periodo_sbpro))]
+
+filtro_sb11 &lt;- (validar_sb11 &amp; cruce_completo$periodo_sb11_num &gt;= 20141 &amp; cruce_completo$periodo_sb11_num &lt;= 20252)
+filtro_sbpro &lt;- (validar_sbpro &amp; cruce_completo$periodo_sbpro_num &gt;= 20141 &amp; cruce_completo$periodo_sbpro_num &lt;= 20252)
+
+cruce_filtrado &lt;- cruce_completo[filtro_sb11 &amp; filtro_sbpro]
+
+cruce_filtrado &lt;- unique(
+  cruce_filtrado[, .(estu_consecutivo_sb11, periodo_sb11, estu_consecutivo_sbpro, periodo_sbpro)]
+)
+
+setorder(cruce_filtrado, periodo_sb11, estu_consecutivo_sb11, periodo_sbpro)
+
+cruce_filtrado[, ano_sb11 := as.integer(substr(periodo_sb11, 1, 4))]
+cruce_filtrado[, semestre_sb11 := as.integer(substr(periodo_sb11, 5, 5))]
+cruce_filtrado[, ano_sbpro := as.integer(substr(periodo_sbpro, 1, 4))]
+cruce_filtrado[, semestre_sbpro := as.integer(substr(periodo_sbpro, 5, 5))]
+
+cruce_filtrado[, rezago_semestres := (ano_sbpro - ano_sb11) * 2 + (semestre_sbpro - semestre_sb11)]
+
+# Saber Pro debe ser posterior a Saber 11
+cruce_filtrado &lt;- cruce_filtrado[rezago_semestres &gt; 0]
+
+setcolorder(cruce_filtrado, c(&quot;estu_consecutivo_sb11&quot;, &quot;periodo_sb11&quot;, &quot;estu_consecutivo_sbpro&quot;, &quot;periodo_sbpro&quot;,
+                               &quot;ano_sb11&quot;, &quot;semestre_sb11&quot;, &quot;ano_sbpro&quot;, &quot;semestre_sbpro&quot;, &quot;rezago_semestres&quot;))
+
+cat(&quot;Total de estudiantes/emparejamientos:&quot;, nrow(cruce_filtrado), &quot;\n&quot;)
+cat(&quot;Estudiantes Saber 11 únicos:&quot;, uniqueN(cruce_filtrado$estu_consecutivo_sb11), &quot;\n&quot;)
+cat(&quot;Estudiantes Saber Pro únicos:&quot;, uniqueN(cruce_filtrado$estu_consecutivo_sbpro), &quot;\n&quot;)
+
+ruta_salida &lt;- file.path(dirname(archivos[1]), &quot;CRUCE_SABER11_SABERPRO_2014_2025.csv&quot;)
+fwrite(cruce_filtrado, ruta_salida, sep = &quot;;&quot;, bom = TRUE)
+</pre>
+</details>
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Verificación aplicada</span> <span class="bitacora-completar">[COMPLETAR]</span> — Indicar cómo se comprobó
+que el filtrado y el cálculo del rezago fueran correctos (ej. revisión
+manual de una muestra de registros con periodo_sb11 y periodo_sbpro
+conocidos, contraste del total de estudiantes únicos resultante contra
+el esperado).</p>
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Resultado</span> <span class="bitacora-completar">[COMPLETAR]</span> — ¿Se aceptó tal cual, se
+corrigió algo (ej. el manejo de los <code>periodo_sbpro</code> con
+formato “2014” sin semestre que la propia respuesta señala como una
+posible inconsistencia), o se descartó?</p>
 </div>
 </div>
 </div>
@@ -642,10 +1567,101 @@ names(base_saber11_clean) &lt;- ifelse(
 </details>
 </div>
 <div class="bitacora-field">
-<p><span class="bitacora-field-label">Respuesta obtenida</span> Código
-refactorizado eliminando funciones pesadas de <code>dplyr</code> y
-reemplazándolas por la sintaxis nativa optimizada de
-<code>data.table</code> (<code>unique(df, by = …)</code>).</p>
+<span class="bitacora-field-label">Respuesta obtenida</span> Explicación
+de la causa (<code>duplicated()</code> de R base y <code>group_by()
+%&gt;% slice(1)</code> de dplyr no están optimizados para millones de
+filas: dplyr intenta crear millones de grupos en memoria RAM y se
+congela) y reescritura completa del script reemplazando esa lógica por
+operaciones nativas de <code>data.table</code> (<code>unique(dt)</code>
+y <code>unique(dt, by = c(…))</code>, escritas en C de alto
+rendimiento), aplicada tanto a Saber 11 como a Saber Pro, manteniendo el
+resto del esquema (rutas, funciones auxiliares, cruce, control de
+calidad, estadística descriptiva y exportación) igual al de la Entrada
+2.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+# ============================================================
+# 5. CARGA Y HOMOLOGACIÓN DE SABER 11 (ULTRA OPTIMIZADO)
+# ============================================================
+df_s11_raw &lt;- leer_csv_icfes(ruta_saber11_csv)
+mapa_s11   &lt;- homologar_mapeo_columnas(colnames(df_s11_raw), variables_saber11)
+
+if (!&quot;estu_consecutivo&quot; %in% names(mapa_s11)) {
+  stop(&quot;ERROR CRÍTICO: La base de Saber 11 no contiene la columna &#39;estu_consecutivo&#39;.&quot;)
+}
+
+dt_s11_proc &lt;- as.data.table(matrix(NA_character_, nrow = nrow(df_s11_raw), ncol = length(variables_saber11)))
+colnames(dt_s11_proc) &lt;- variables_saber11
+for (v in names(mapa_s11)) {
+  set(dt_s11_proc, j = v, value = df_s11_raw[[mapa_s11[[v]]]])
+}
+
+dt_s11_proc[, anio_eval := extraer_anio(periodo)]
+dt_s11_proc &lt;- dt_s11_proc[is.na(anio_eval) | anio_eval %in% anios_validos_s11]
+dt_s11_proc[, anio_eval := NULL]
+
+# Auditoría y Deduplicación ultra rápida con data.table
+n_filas_s11_orig &lt;- nrow(dt_s11_proc)
+dt_s11_unicas    &lt;- unique(dt_s11_proc)
+duplicados_s11_exactos &lt;- n_filas_s11_orig - nrow(dt_s11_unicas)
+
+# Retener únicamente el primer registro por ID + Período
+dt_s11_clean &lt;- unique(dt_s11_unicas, by = c(&quot;estu_consecutivo&quot;, &quot;periodo&quot;))
+duplicados_s11_id_per &lt;- nrow(dt_s11_unicas) - nrow(dt_s11_clean)
+
+base_saber11_clean &lt;- as.data.frame(dt_s11_clean)
+colnames(base_saber11_clean) &lt;- paste0(prefijo_saber11, colnames(base_saber11_clean))
+
+cat(sprintf(&quot;[SABER 11] Exactos eliminados: %s | Duplicados ID-Período eliminados: %s\n&quot;,
+            format(duplicados_s11_exactos, big.mark = &quot;,&quot;),
+            format(duplicados_s11_id_per, big.mark = &quot;,&quot;)))
+
+# ============================================================
+# 6. CARGA Y HOMOLOGACIÓN DE SABER PRO (ULTRA OPTIMIZADO) — misma lógica
+# ============================================================
+df_spro_raw &lt;- leer_csv_icfes(ruta_saberpro_csv)
+mapa_spro   &lt;- homologar_mapeo_columnas(colnames(df_spro_raw), variables_saberpro)
+
+if (!&quot;estu_consecutivo&quot; %in% names(mapa_spro)) {
+  stop(&quot;ERROR CRÍTICO: La base de Saber Pro no contiene la columna &#39;estu_consecutivo&#39;.&quot;)
+}
+
+dt_spro_proc &lt;- as.data.table(matrix(NA_character_, nrow = nrow(df_spro_raw), ncol = length(variables_saberpro)))
+colnames(dt_spro_proc) &lt;- variables_saberpro
+for (v in names(mapa_spro)) {
+  set(dt_spro_proc, j = v, value = df_spro_raw[[mapa_spro[[v]]]])
+}
+
+dt_spro_proc[, anio_eval := extraer_anio(periodo)]
+dt_spro_proc &lt;- dt_spro_proc[is.na(anio_eval) | anio_eval %in% anios_validos_spro]
+dt_spro_proc[, anio_eval := NULL]
+
+n_filas_spro_orig &lt;- nrow(dt_spro_proc)
+dt_spro_unicas    &lt;- unique(dt_spro_proc)
+duplicados_spro_exactos &lt;- n_filas_spro_orig - nrow(dt_spro_unicas)
+
+dt_spro_clean &lt;- unique(dt_spro_unicas, by = c(&quot;estu_consecutivo&quot;, &quot;periodo&quot;))
+duplicados_spro_id_per &lt;- nrow(dt_spro_unicas) - nrow(dt_spro_clean)
+
+base_saberpro_clean &lt;- as.data.frame(dt_spro_clean)
+colnames(base_saberpro_clean) &lt;- paste0(prefijo_saberpro, colnames(base_saberpro_clean))
+
+cat(sprintf(&quot;[SABER PRO] Exactos eliminados: %s | Duplicados ID-Período eliminados: %s\n&quot;,
+            format(duplicados_spro_exactos, big.mark = &quot;,&quot;),
+            format(duplicados_spro_id_per, big.mark = &quot;,&quot;)))
+
+# El resto del script (lectura de las 3 rutas con conversión automática
+# a CSV, homologación de columnas, cruce con la tabla maestra mediante
+# left_join(), cálculo de rezago_semestres y trayectoria_valida_temporal,
+# tabla_control_cruces con 12 métricas, estadísticas descriptivas y
+# exportación a CSV/Excel) se mantiene igual al de la Entrada 2, solo
+# con la base de cruces también migrada a data.table
+# (dt_cruce &lt;- as.data.table(...); unique(dt_cruce[...])) por consistencia.
+</pre>
+</details>
 </div>
 <div class="bitacora-field">
 <p><span class="bitacora-field-label">Verificación aplicada</span> Se
@@ -657,6 +1673,372 @@ idéntico conteo de filas.</p>
 <p><span class="bitacora-field-label">Resultado</span> Aceptado:
 solución robusta que garantizó la viabilidad computacional del proyecto
 con millones de registros.</p>
+</div>
+</div>
+<div class="bitacora-card">
+<h4>
+Entrada 12 — Error de lógica en el filtrado temporal: eliminación
+silenciosa de períodos válidos (ej. 20153)
+</h4>
+<div class="bitacora-meta">
+Fecha: [COMPLETAR]  |  Etapa: Debugging crítico — auditoría de
+correspondencia cruces↔︎Saber Pro y corrección del filtro de años
+(herramienta: Gemini)
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Objetivo</span> Diagnosticar por
+qué un <code>estu_consecutivo_sbpro</code> presente en la base oficial
+de cruces no aparecía en la base ya filtrada de Saber Pro, y corregir la
+causa raíz: el filtro temporal comparaba el código completo de período
+(ej. <code>periodo &gt;= 20141 &amp; periodo &lt;= 20252</code>), lo que
+eliminaba silenciosamente períodos válidos con otra numeración de
+semestre, como <code>20153</code>.</p>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Intercambio 1 — Diagnóstico del
+problema</span></p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span>
+<pre class="prompt-full">estoy teniendo problema de logica. tengo 3 bases de datos ya filtradas. todos los icfes desde 2014 a 2025. todos los saber Pro desde 2014 a 2024. y los cruces desde 2014 a 2025. si saco un codigo de la base de cruces y lo busco en el de saber pro deberia si o si aparecer</pre>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span> Gemini
+explicó que el <code>estu_consecutivo_sbpro</code> del cruce debe
+buscarse contra la columna <code>estu_consecutivo</code> de Saber Pro
+(no contra <code>estu_consecutivo_sb11</code>), señaló una posible
+inconsistencia de cobertura temporal (cruces hasta 2025 vs. Saber Pro
+solo hasta 2024) y propuso una auditoría automática que comparara
+cuántos identificadores del cruce sí y no tenían correspondencia en la
+base de Saber Pro, antes de asumir un error de lógica.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+Sí, en principio debería aparecer, pero hay una condición fundamental: tienes que comparar el código correcto y la misma unidad temporal.
+
+Por ejemplo, si el cruce dice Saber 11 → SB1120012011642657, Saber Pro → EK201210000004, periodo_sbpro → 20191, al buscar EK201210000004 en tu base de Saber Pro debería existir ese estudiante siempre que: 1) la base de Saber Pro incluya el período 20191; 2) EK201210000004 no haya sido eliminado durante tu limpieza; 3) estés buscando en la columna estu_consecutivo; 4) no exista algún problema de formato, espacios o conversión del identificador.
+
+Hay una posible inconsistencia importante: si Saber 11 va de 2014–2025, Saber Pro de 2014–2024 y Cruces de 2014–2025, entonces si el cruce contiene periodo_sbpro = 2025x, esa persona no puede aparecer en tu base Saber Pro si tu base solo llega hasta 2024 — eso sería normal. Pero para cualquier registro del cruce donde periodo_sbpro &lt;= 20242, sí debería encontrarse el estu_consecutivo_sbpro en la base Saber Pro, suponiendo que los filtros fueron hechos correctamente.
+
+También hay que tener cuidado: el estu_consecutivo_sbpro del cruce debe buscarse contra estu_consecutivo de la base Saber Pro, no contra estu_consecutivo_sb11.
+
+En vez de comprobarlo manualmente uno por uno, se puede hacer una auditoría automática: cruzar estu_consecutivo_sbpro contra estu_consecutivo de Saber Pro y obtener cuántos cruces tienen correspondencia, cuántos no aparecen, cuáles son, en qué período deberían estar, y si los faltantes corresponden justamente a 2025. Eso diría inmediatamente si hay un problema real de lógica o solo un problema de cobertura temporal. Para esa comprobación no se debe usar todavía periodo_sbpro como llave del join; primero hay que comprobar si el estu_consecutivo_sbpro del cruce existe en la base Saber Pro, y luego verificar que el período también coincida.
+
+Se solicitan las rutas de las tres bases para preparar un script de auditoría que indique qué porcentaje de los cruces oficiales existe en la base de Saber Pro y cuáles están faltando.
+</pre>
+</details>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Intercambio 2 — Confirmación de la
+causa real y de la nueva regla temporal</span></p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span>
+<pre class="prompt-full">vale, sin duda es problema del codigo, esto es grave e inacaeptable ya que me hace esperar de 0. cuadno junte los 2014 a 2020 saber pro, el periodo 20153 no aparece.(debe haber mas casos asi). vamos a mejorar y dar robustes al codigo, que pide las rutas de acceso, selecciona solo las variables de interes y da robustes a los NA. te pasare el codigo base y debes darle robustes manteniendo el esquema. confirma si entiendes el problema y tu mision</pre>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span> Gemini
+confirmó el diagnóstico: el problema era comparar el período completo
+(ej. <code>periodo &gt;= 20141 &amp; periodo &lt;= 20252</code>), lo que
+podía excluir períodos válidos con otra numeración de semestre como
+<code>20153</code>. Estableció la nueva regla temporal única (todos los
+registros de 2014 a 2025 cuentan, sin importar el sufijo de semestre;
+los NA en variables de interés no deben eliminar el registro) y solicitó
+el código base para robustecerlo manteniendo su esquema.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+Entendido. Entonces la regla queda mucho más simple y no se volverá a introducir lógica semestral que pueda eliminar registros válidos.
+
+Regla temporal única: Saber 11, Saber Pro y Cruces conservan todos los registros de 2014 a 2025; 20141, 20142, 20153, etc. todos cuentan siempre que el año esté entre 2014 y 2025; los NA, vacíos o formatos particulares de período no deben provocar eliminaciones indebidas.
+
+La prioridad del nuevo código será: Rutas → Lectura robusta → Selección de variables de interés → Limpieza de NA/vacíos/espacios → Filtro por año 2014–2025 → Cruce con los identificadores oficiales → Base final.
+
+No se utilizará una condición como periodo &gt;= 20141 &amp; periodo &lt;= 20252, porque precisamente esa lógica fue la que puede generar errores con períodos como 20153.
+
+Se solicita el código base para robustecerlo manteniendo su mismo esquema.
+</pre>
+</details>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Intercambio 3 — Corrección del
+código: extracción de año en lugar de comparación de período
+completo</span></p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span> Envío del script base
+de lectura y consolidación de Saber Pro (rutas,
+<code>variables_objetivo</code> de 47 variables, funciones de
+normalización de nombres, lectura con <code>fread()</code>, unión con
+<code>rbindlist()</code>, selección y exportación) para que se
+robusteciera manteniendo el mismo esquema.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+# ============================================================
+# 1. CARGA DE LIBRERÍAS
+# ============================================================
+library(data.table)
+library(stringi)
+
+# ============================================================
+# 2. DEFINICIÓN DE RUTAS
+# ============================================================
+rutas_archivos &lt;- c(
+  &quot;2014-2020&quot; = &quot;C:/Users/Invitadou/Desktop/Trabajo 1/SABER PRO 2014 A 2020.csv&quot;,
+  &quot;2021-2024&quot; = &quot;C:/Users/Invitadou/Desktop/Trabajo 1/SABER PRO 2021 A 2024.csv&quot;
+)
+
+# ============================================================
+# 3. VARIABLES DE INTERÉS (47 variables: identificación, información
+# de Saber 11 y rezago, colegio de origen, contexto geográfico y
+# demográfico, contexto socioeconómico, trayectoria y características
+# de educación superior, institución, condiciones de permanencia,
+# resultados Saber Pro)
+# ============================================================
+variables_objetivo &lt;- c(&quot;periodo&quot;,&quot;estu_consecutivo&quot;, &quot;estu_ano_examenestado_sb11&quot;, &quot;estu_semestre_examenestadosb11&quot;,
+  &quot;estu_ano_egreso&quot;,&quot;estu_ano_terminobachiller&quot;,&quot;estu_coddane_cole_termino&quot;,&quot;estu_codicfescole_termino&quot;,
+  &quot;estu_cole_termino&quot;,&quot;estu_depto_reside&quot;,&quot;estu_areareside&quot;,&quot;estu_mcpio_reside&quot;,&quot;estu_genero&quot;,&quot;estu_discapacidad&quot;,
+  &quot;estu_etnia&quot;,&quot;estu_inse_individual&quot;,&quot;estu_nse_individual&quot;,&quot;fami_estratovivienda&quot;,&quot;fami_tieneinternet&quot;,
+  &quot;fami_educacionmadre&quot;,&quot;fami_educacionpadre&quot;,&quot;fami_ingreso_fmiliar_mensual&quot;,&quot;fami_nivel_sisben&quot;,
+  &quot;estu_nivel_prgm_academico&quot;,&quot;estu_metodo_prgm&quot;,&quot;estu_prgm_academico&quot;,&quot;estu_snies_prgmacademico&quot;,
+  &quot;estu_nucleo_pregrado&quot;,&quot;estu_semestrecursa&quot;,&quot;estu_porcentajecreditosaprob&quot;,&quot;inst_cod_institucion&quot;,
+  &quot;inst_nombre_institucion&quot;,&quot;inst_caracter_academico&quot;,&quot;inst_origen&quot;,&quot;estu_trabaja_actualmente&quot;,
+  &quot;estu_horassemanatrabaja&quot;,&quot;estu_pagomatriculabeca&quot;,&quot;estu_pagomatriculacredito&quot;,&quot;estu_pagomatriculapadres&quot;,
+  &quot;estu_pagomatriculapropio&quot;,&quot;estu_valormatriculauniversidad&quot;,&quot;mod_comuni_escrita_punt&quot;,&quot;mod_competen_ciudada_punt&quot;,
+  &quot;mod_ingles_punt&quot;,&quot;mod_lectura_critica_punt&quot;,&quot;mod_razona_cuantitat_punt&quot;,&quot;punt_global&quot;,&quot;percentil_global&quot;)
+
+# ============================================================
+# 4. FUNCIONES AUXILIARES: normalizar_nombre() (minúsculas, sin tildes,
+# caracteres raros -&gt; &quot;_&quot;), leer_archivo_icfes() (intenta UTF-8 y
+# Latin-1, separador automático), estandarizar_columnas() (empareja
+# nombres normalizados contra variables_objetivo)
+# ============================================================
+# [funciones auxiliares completas, ver Entrada 12 - Respuesta obtenida]
+
+# ============================================================
+# 5-6. LECTURA Y UNIÓN: lapply() sobre las rutas, estandarizar_columnas(),
+# rbindlist(use.names = TRUE, fill = TRUE)
+# ============================================================
+
+# ============================================================
+# 7-9. LIMPIEZA: variables faltantes se crean como NA, selección de
+# variables_objetivo con base_consolidada[, ..variables_objetivo],
+# setcolorder()
+# ============================================================
+
+# ============================================================
+# 10-11. RESULTADO Y EXPORTACIÓN: cat() de filas/columnas, head(),
+# fwrite(sep = &quot;;&quot;, bom = TRUE)
+# ============================================================
+</pre>
+</details>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span> Versión
+robustecida del script manteniendo el mismo esquema (rutas → variables →
+funciones → lectura → unión → limpieza → selección → exportación), con
+la corrección crítica: en lugar de comparar el período completo, se
+extraen únicamente los primeros 4 dígitos como año (<code>anio_periodo
+:= as.integer(substr(periodo, 1, 4))</code>) y se filtra por
+<code>anio_periodo entre 2014 y 2025</code>, de forma que
+<code>20141</code>, <code>20153</code>, <code>20241</code>, etc. se
+conservan todos. Añade doble intento de lectura (UTF-8 / Latin-1),
+conserva <code>estu_consecutivo</code> como texto, convierte cadenas
+vacías a NA sin eliminar registros, informa cuántas filas se descartaron
+por el filtro temporal y lista los períodos finales encontrados como
+control de calidad.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+# ============================================================
+# 1. CARGA DE LIBRERÍAS
+# ============================================================
+if (!requireNamespace(&quot;data.table&quot;, quietly = TRUE)) install.packages(&quot;data.table&quot;)
+if (!requireNamespace(&quot;stringi&quot;, quietly = TRUE)) install.packages(&quot;stringi&quot;)
+library(data.table); library(stringi)
+
+# ============================================================
+# 2. DEFINICIÓN DE RUTAS (igual que el código base)
+# ============================================================
+rutas_archivos &lt;- c(
+  &quot;2014-2020&quot; = &quot;C:/Users/Invitadou/Desktop/Trabajo 1/SABER PRO 2014 A 2020.csv&quot;,
+  &quot;2021-2024&quot; = &quot;C:/Users/Invitadou/Desktop/Trabajo 1/SABER PRO 2021 A 2024.csv&quot;
+)
+
+# ============================================================
+# 3. VARIABLES DE INTERÉS (idénticas al código base, 47 variables)
+# ============================================================
+# ... (sin cambios respecto al código base)
+
+# ============================================================
+# 4.1 NORMALIZAR NOMBRES DE COLUMNAS
+# ============================================================
+normalizar_nombre &lt;- function(x) {
+  x &lt;- as.character(x); x &lt;- tolower(x)
+  x &lt;- stringi::stri_trans_general(x, &quot;Latin-ASCII&quot;)
+  x &lt;- gsub(&quot;[^a-z0-9]+&quot;, &quot;_&quot;, x); x &lt;- gsub(&quot;^_+|_+$&quot;, &quot;&quot;, x); x &lt;- gsub(&quot;_+&quot;, &quot;_&quot;, x)
+  return(x)
+}
+
+# ============================================================
+# 4.2 LEER ARCHIVO DE FORMA ROBUSTA (doble intento UTF-8 / Latin-1)
+# ============================================================
+leer_archivo_icfes &lt;- function(ruta) {
+  if (!file.exists(ruta)) stop(paste0(&quot;No existe el archivo:\n&quot;, ruta))
+  resultado &lt;- tryCatch({
+    fread(file = ruta, sep = &quot;auto&quot;, encoding = &quot;UTF-8&quot;, fill = TRUE, quote = &quot;&quot;,
+          na.strings = c(&quot;&quot;,&quot;NA&quot;,&quot;N/A&quot;,&quot;NULL&quot;,&quot;null&quot;,&quot;NaN&quot;,&quot;nan&quot;),
+          strip.white = TRUE, showProgress = FALSE, data.table = TRUE, check.names = FALSE)
+  }, error = function(e) NULL)
+  if (is.null(resultado)) {
+    resultado &lt;- tryCatch({
+      fread(file = ruta, sep = &quot;auto&quot;, encoding = &quot;Latin-1&quot;, fill = TRUE, quote = &quot;&quot;,
+            na.strings = c(&quot;&quot;,&quot;NA&quot;,&quot;N/A&quot;,&quot;NULL&quot;,&quot;null&quot;,&quot;NaN&quot;,&quot;nan&quot;),
+            strip.white = TRUE, showProgress = FALSE, data.table = TRUE, check.names = FALSE)
+    }, error = function(e) stop(paste0(&quot;No fue posible leer el archivo:\n&quot;, ruta, &quot;\n\nError:\n&quot;, e$message)))
+  }
+  names(resultado) &lt;- trimws(names(resultado))
+  return(resultado)
+}
+
+# ============================================================
+# 4.3 ESTANDARIZAR COLUMNAS / 4.4 COMPLETAR VARIABLES FALTANTES COMO NA
+# ============================================================
+estandarizar_columnas &lt;- function(dt, variables_objetivo) {
+  nombres_originales &lt;- names(dt)
+  nombres_normalizados &lt;- normalizar_nombre(nombres_originales)
+  for (variable in variables_objetivo) {
+    variable_normalizada &lt;- normalizar_nombre(variable)
+    indices &lt;- which(nombres_normalizados == variable_normalizada)
+    if (length(indices) &gt;= 1) {
+      if (length(indices) &gt; 1) warning(paste0(&quot;Más de una columna corresponde a &#39;&quot;, variable, &quot;&#39;. Se utilizará la primera.&quot;))
+      setnames(dt, old = nombres_originales[indices[1]], new = variable)
+    }
+  }
+  return(dt)
+}
+
+completar_variables &lt;- function(dt, variables_objetivo) {
+  faltantes &lt;- setdiff(variables_objetivo, names(dt))
+  if (length(faltantes) &gt; 0) for (variable in faltantes) dt[, (variable) := NA_character_]
+  return(dt)
+}
+
+# ============================================================
+# 5. LECTURA DE ARCHIVOS
+# ============================================================
+lista_bases &lt;- vector(mode = &quot;list&quot;, length = length(rutas_archivos))
+names(lista_bases) &lt;- names(rutas_archivos)
+for (nombre_archivo in names(rutas_archivos)) {
+  ruta &lt;- rutas_archivos[[nombre_archivo]]
+  dt &lt;- leer_archivo_icfes(ruta)
+  dt &lt;- estandarizar_columnas(dt, variables_objetivo)
+  dt &lt;- completar_variables(dt, variables_objetivo)
+  dt &lt;- dt[, ..variables_objetivo]
+  lista_bases[[nombre_archivo]] &lt;- dt
+}
+
+# ============================================================
+# 6. UNIÓN DE LAS BASES
+# ============================================================
+base_consolidada &lt;- rbindlist(lista_bases, use.names = TRUE, fill = TRUE)
+
+# ============================================================
+# 7. LIMPIEZA DE VARIABLES DE IDENTIFICACIÓN (texto, no numérico)
+# ============================================================
+base_consolidada[, estu_consecutivo := trimws(as.character(estu_consecutivo))]
+base_consolidada[, periodo := trimws(as.character(periodo))]
+base_consolidada[, estu_consecutivo := fifelse(estu_consecutivo == &quot;&quot;, NA_character_, estu_consecutivo)]
+base_consolidada[, periodo := fifelse(periodo == &quot;&quot;, NA_character_, periodo)]
+
+# ============================================================
+# 8. FILTRAR AÑOS 2014-2025 — CORRECCIÓN CRÍTICA
+# ============================================================
+# NO se compara periodo &gt;= 20141, porque eso elimina períodos válidos
+# como 20153. Se extraen únicamente los primeros 4 dígitos (el año).
+base_consolidada[, anio_periodo := suppressWarnings(as.integer(substr(periodo, 1, 4)))]
+
+filas_antes_filtro &lt;- nrow(base_consolidada)
+
+base_consolidada &lt;- base_consolidada[!is.na(anio_periodo) &amp; anio_periodo &gt;= 2014 &amp; anio_periodo &lt;= 2025]
+
+filas_despues_filtro &lt;- nrow(base_consolidada)
+
+cat(&quot;\nRegistros antes del filtro temporal:&quot;, filas_antes_filtro, &quot;\n&quot;)
+cat(&quot;Registros después del filtro temporal:&quot;, filas_despues_filtro, &quot;\n&quot;)
+cat(&quot;Registros eliminados por estar fuera del rango o no tener año válido:&quot;,
+    filas_antes_filtro - filas_despues_filtro, &quot;\n&quot;)
+
+# ============================================================
+# 9-10. ELIMINAR COLUMNA AUXILIAR DEL AÑO Y ORDENAR
+# ============================================================
+base_final &lt;- base_consolidada[, anio_periodo := NULL]
+setcolorder(base_final, variables_objetivo)
+
+# ============================================================
+# 11. CONTROL DE CALIDAD
+# ============================================================
+cat(&quot;\nNúmero de filas:&quot;, nrow(base_final), &quot;\n&quot;)
+cat(&quot;Número de columnas:&quot;, ncol(base_final), &quot;\n&quot;)
+
+faltantes_finales &lt;- setdiff(variables_objetivo, names(base_final))
+if (length(faltantes_finales) &gt; 0) {
+  stop(paste0(&quot;ERROR: faltan variables en la base final:\n&quot;, paste(faltantes_finales, collapse = &quot;, &quot;)))
+}
+cat(&quot;\nTodas las variables de interés están presentes.\n&quot;)
+
+cat(&quot;\nIdentificadores estu_consecutivo NA:&quot;, sum(is.na(base_final$estu_consecutivo)), &quot;\n&quot;)
+cat(&quot;Períodos NA:&quot;, sum(is.na(base_final$periodo)), &quot;\n&quot;)
+cat(&quot;\nPeríodos encontrados en la base:\n&quot;)
+print(sort(unique(na.omit(base_final$periodo))))
+
+# ============================================================
+# 12-13. RESULTADO Y EXPORTACIÓN
+# ============================================================
+print(head(base_final))
+ruta_salida &lt;- &quot;C:/Users/Invitadou/Downloads/SABER_PRO_2014_2025_VARIABLES_INTERES.csv&quot;
+fwrite(base_final, file = ruta_salida, sep = &quot;;&quot;, bom = TRUE, na = &quot;&quot;)
+cat(&quot;\nArchivo exportado en:\n&quot;, ruta_salida, &quot;\n&quot;)
+</pre>
+</details>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Verificación aplicada</span> El
+error se detectó de forma empírica: al construir la base de Saber Pro
+2014–2020, el período <code>20153</code> no aparecía, pese a que un
+<code>estu_consecutivo_sbpro</code> correspondiente sí existía en la
+base oficial de cruces del ICFES para ese período. Rastreando la lógica
+del filtro se identificó que la comparación <code>periodo &gt;= 20141
+&amp; periodo &lt;= 20252</code> descartaba silenciosamente períodos con
+codificación de semestre distinta a 1 o 2. Tras la corrección, el script
+informa explícitamente cuántos registros se descartan por el filtro
+temporal y lista los períodos finales presentes en la base, lo que
+permite confirmar que <code>20153</code> y casos similares ya se
+conservan.</p>
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Resultado</span> Aceptado con
+corrección crítica: se identificó y corrigió un error de lógica que
+eliminaba silenciosamente registros con períodos válidos. Se reemplazó
+la comparación directa del código de período completo por la extracción
+del año (primeros 4 dígitos) y un filtro simple por rango de año
+(2014–2025), eliminando la dependencia de una estructura de semestre
+asumida. Esta corrección se considera especialmente relevante porque
+afectaba directamente la tasa de correspondencia entre los cruces
+oficiales y la base de Saber Pro.</p>
 </div>
 </div>
 </div>
@@ -725,21 +2107,158 @@ Analiza el codigo y añadele las mejoras que solucionen el problema que te dije,
 <p><span class="bitacora-field-label">Verificación aplicada</span> Se
 filtró el período 20141 en la variable <code>punt_global</code>
 comprobando que la tasa de valores faltantes descendiera al rango
-esperado, y se verificó que <code>ncol()</code> retornara exactamente
-las 62 variables definidas para la base final.</p>
+esperado, y se verificó que <code>ncol()</code> retornara el número de
+variables definidas en <code>orden_variables_final</code> (más de 65,
+frente a las 27 que arrojaba el filtro anterior).</p>
 </div>
 <div class="bitacora-field">
-<p><span class="bitacora-field-label">Respuesta obtenida</span> Script
-ajustado con rutinas de coerción tipográfica
-(<code>as.character()</code>, <code>trimws()</code>) previas al join, y
-aplicación estricta de <code>select(any_of())</code> con el vector
-completo de variables de interés.</p>
+<p><span class="bitacora-field-label">Respuesta obtenida</span>
+Diagnóstico real: los NA tras el cruce (especialmente en 20141) se
+debían a inconsistencias ocultas en las llaves de emparejamiento
+—mayúsculas/ minúsculas distintas (ej. “EK20141…” vs. “ek20141…”),
+espacios invisibles o guiones (ej. “2014-1”)— que rompen un
+<code>left_join()</code> por ser estrictamente sensible a esas
+diferencias; y el recorte a 27 variables se debía a que
+<code>orden_variables_final</code> actuaba como filtro estricto al final
+del script. Mejoras entregadas: normalización extrema de llaves
+(mayúsculas forzadas, sin espacios ni guiones) para garantizar cruces
+exactos; deduplicación inteligente que, al eliminar duplicados, cuenta
+los NA de cada fila repetida y conserva la que tiene más datos reales; y
+ampliación de <code>variables_saber11</code>,
+<code>variables_saberpro</code> y <code>orden_variables_final</code> con
+el listado completo entregado (de 27 a más de 65 variables), ajustando
+también los nombres de las tablas descriptivas.</p>
 </div>
 <div class="bitacora-field">
 <p><span class="bitacora-field-label">Resultado</span> Aceptado con alta
-relevancia: evidenció la importancia de limpiar espacios invisibles en
-las llaves institucionales del ICFES antes de efectuar cruces
-relacionales.</p>
+relevancia: la causa real no era el período 20141 en sí, sino la
+sensibilidad del cruce a diferencias de formato en las llaves —
+evidenció la importancia de normalizar (mayúsculas, espacios, guiones)
+los identificadores institucionales del ICFES antes de efectuar cruces
+relacionales, además de corregir el filtro de variables que truncaba la
+base a 27 columnas.</p>
+</div>
+</div>
+<div class="bitacora-card">
+<h4>
+Entrada 13 — Verificación de que el error de filtrado temporal no se
+repitiera en Saber 11
+</h4>
+<div class="bitacora-meta">
+Fecha: [COMPLETAR]  |  Etapa: Control de Calidad — extensión preventiva
+de la corrección de la Entrada 12 (herramienta: Gemini)
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Objetivo</span> Verificar si el
+mismo error de lógica de filtrado temporal detectado y corregido en
+Saber Pro (Entrada 12) también afectaba a la base de Saber 11, aplicando
+al script de Saber 11 las mismas mejoras de robustez (lectura, manejo de
+NA, extracción de año en vez de comparar el período completo).</p>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Intercambio 1 — Solicitud de
+aplicar las mismas mejoras al script de Saber 11</span></p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span>
+<pre class="prompt-full">ok, con el objetivo de revisar que el error no haya pasado tambien en la base de datos del SABER 11. te pasasre el codigo que utilice y le vas a añadir las mismas mejoras y robustes que a este. entregame el codigo completo y mejorado listo para copiar y pegar. las variables de saber 11 son estas : Variables elegidas del saber 11: variables_objetivo &lt;- c(&quot;periodo &quot;,
+  &quot;estu_consecutivo&quot;,
+  &quot;estu_estudiante&quot;,
+  &quot;cole_area_ubicacion&quot;,
+  &quot;cole_bilingue&quot;,
+  &quot;cole_calendario&quot;,
+  &quot;cole_jornada&quot;,
+  &quot;cole_naturaleza&quot;,
+  &quot;estu_depto_reside&quot;,
+  &quot;estu_inse_individual&quot;,
+  &quot;estu_repite&quot;,
+  &quot;fami_estratovivienda&quot;,
+  &quot;fami_tieneinternet&quot;,
+  &quot;punt_c_naturales&quot;,
+  &quot;punt_ingles&quot;,
+  &quot;punt_lectura_critica&quot;,
+  &quot;punt_matematicas&quot;,
+  &quot;punt_sociales_ciudadanas&quot;,
+  &quot;percentil_global&quot;,
+  &quot;punt_global&quot;
+)</pre>
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Respuesta obtenida</span> Gemini
+confirmó que aplicaría a Saber 11 la misma lógica de robustez
+incorporada para Saber Pro (lectura tolerante a <code>;</code> dentro de
+textos entre comillas, extracción de año en vez de comparar el período
+completo), detectó y corrigió por su cuenta un espacio invisible al
+final de <code>“periodo”</code> en el vector de variables (normalizado a
+<code>“periodo”</code> para mantener consistencia con el resto de las
+bases), y entregó el script completo de lectura/consolidación de Saber
+11 con la sección de rutas centralizada al inicio.</p>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Intercambio 2 — Corrección: el
+archivo de 20141 no se leía por estar en formato distinto</span></p>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Prompt</span>
+<pre class="prompt-full">no leyo 20141 por ser cvs. como hago para convertirlo en txt</pre>
+</div>
+<div class="bitacora-field">
+<span class="bitacora-field-label">Respuesta obtenida</span> Gemini
+explicó que, dado que la base de 20141 estaba en <code>.csv</code>
+mientras el resto de Saber 11 estaba en <code>.txt</code>, la opción más
+simple era convertir manualmente el CSV a TXT conservando el separador
+<code>;</code>, y entregó un script corto de conversión con
+<code>fread()</code> y <code>fwrite()</code>.
+<details>
+<summary>
+Ver más
+</summary>
+<pre class="prompt-full">
+library(data.table)
+
+ruta_csv &lt;- &quot;C:/Users/Invitadou/Desktop/ICFES/Saber11_20141_homologada.csv&quot;
+ruta_txt &lt;- &quot;C:/Users/Invitadou/Desktop/ICFES/Saber11_20141_homologada.txt&quot;
+
+base_20141 &lt;- fread(
+  ruta_csv,
+  sep = &quot;;&quot;,
+  encoding = &quot;UTF-8&quot;,
+  quote = &quot;\&quot;&quot;,
+  fill = Inf,
+  header = TRUE,
+  check.names = FALSE
+)
+
+fwrite(
+  base_20141,
+  file = ruta_txt,
+  sep = &quot;;&quot;,
+  bom = TRUE,
+  na = &quot;&quot;
+)
+
+cat(&quot;Archivo convertido correctamente:\n&quot;)
+cat(ruta_txt, &quot;\n&quot;)
+</pre>
+</details>
+</div>
+<hr style="border: none; border-top: 1px dashed #ccc; margin: 14px 0;">
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Verificación aplicada</span> Se
+ejecutó el script robustecido sobre las bases de Saber 11 y se detectó,
+por la ausencia de registros del período 20141 en el resultado, que ese
+archivo no estaba siendo leído — a diferencia del resto de períodos, que
+sí se procesaron correctamente. Esto permitió aislar la causa (formato
+.csv frente a .txt) sin necesidad de revisar toda la lógica de filtrado
+nuevamente.</p>
+</div>
+<div class="bitacora-field">
+<p><span class="bitacora-field-label">Resultado</span> <span class="bitacora-completar">[COMPLETAR]</span> — ¿Tras convertir 20141 a
+.txt y volver a ejecutar el script, se confirmó que Saber 11 no tenía el
+mismo error de filtrado temporal que Saber Pro (Entrada 12), o se
+encontró alguna otra inconsistencia?</p>
 </div>
 </div>
 </div>
