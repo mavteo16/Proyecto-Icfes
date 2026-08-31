@@ -12,11 +12,27 @@
 # 1. CONFIGURACIÓN DEL ENTORNO Y CARGA DE LIBRERÍAS
 # ============================================================
 
+# Definir las librerías requeridas para el proceso
+paquetes_requeridos <- c("data.table", "dplyr", "openxlsx", "writexl")
+
+# Identificar cuáles paquetes faltan en el sistema actual
+paquetes_faltantes <- paquetes_requeridos[!(paquetes_requeridos %in% installed.packages()[,"Package"])]
+
+# Instalar automáticamente los paquetes faltantes
+if(length(paquetes_faltantes) > 0) {
+  cat("============================================================\n")
+  cat("INSTALANDO LIBRERÍAS FALTANTES, POR FAVOR ESPERE...\n")
+  cat("Paquetes:", paste(paquetes_faltantes, collapse = ", "), "\n")
+  cat("============================================================\n")
+  install.packages(paquetes_faltantes, dependencies = TRUE, repos = "https://cloud.r-project.org")
+}
+
+# Cargar las librerías silenciosamente
 suppressPackageStartupMessages({
   library(data.table)
   library(dplyr)
   library(openxlsx)
-  library(writexl) # Añadida para la exportación de la matriz
+  library(writexl) # Para la exportación de la matriz
 })
 
 if (!exists("ruta_principal")) {
@@ -25,7 +41,7 @@ if (!exists("ruta_principal")) {
 
 directorio_salida <- "Resultados_Directos_S11_SPro"
 
-cat("============================================================\n")
+cat("\n============================================================\n")
 cat("   INICIANDO MÓDULO DE ESTADÍSTICA DESCRIPTIVA AVANZADA     \n")
 cat("============================================================\n\n")
 
