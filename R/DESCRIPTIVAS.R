@@ -2,10 +2,9 @@
 # PROYECTO ICFES: PERFILAMIENTO Y ESTADÍSTICA DESCRIPTIVA DETALLADA
 # ============================================================
 # Descripción: Este script carga la base de datos limpia y validada,
-# procesa exclusivamente las 17 variables cuantitativas clave (puntajes, 
-# índices y rezago) y las variables cualitativas (socioeconómicas 
-# y de contexto, omitiendo estu_repite e IDs), y exporta un informe ejecutivo 
-# estructurado en Excel con múltiples pestañas profesionales.
+# procesa exclusivamente las 17 variables cuantitativas clave, las variables
+# cualitativas, genera la matriz de cohortes cruzadas en memoria y exporta
+# los resultados a la carpeta del proyecto de forma automatizada.
 # ============================================================
 
 
@@ -17,6 +16,7 @@ suppressPackageStartupMessages({
   library(data.table)
   library(dplyr)
   library(openxlsx)
+  library(writexl) # Añadida para la exportación de la matriz
 })
 
 if (!exists("ruta_principal")) {
@@ -29,6 +29,10 @@ cat("============================================================\n")
 cat("   INICIANDO MÓDULO DE ESTADÍSTICA DESCRIPTIVA AVANZADA     \n")
 cat("============================================================\n\n")
 
+# Validar y crear directorio si no existe
+if (!dir.exists(directorio_salida)) {
+  dir.create(directorio_salida, recursive = TRUE)
+}
 
 # ============================================================
 # 2. CARGA DE LA BASE DE DATOS LIMPIA
@@ -40,7 +44,8 @@ if (!file.exists(ruta_base)) {
   stop(sprintf("No se encontró el archivo limpio en: %s. Asegúrate de ejecutar los pasos previos.", ruta_base))
 }
 
-cat("Leyendo la base de datos consolidada limpia...\n")
+cat("Leyendo la base de datos consolidada limpia (Optimizando RAM)...\n")
+# Se mantiene en as.data.frame para compatibilidad con dplyr, pero se pasa a data.table luego
 df <- fread(ruta_base, colClasses = "character") %>% as.data.frame()
 total_filas <- nrow(df)
 
@@ -175,7 +180,40 @@ if (length(col_periodo_s11) > 0) {
 
 
 # ============================================================
-# 7. EXPORTACIÓN A EXCEL MULTIPESTAÑA PROFESIONAL
+# 7. GENERACIÓN DE MATRIZ DE COHORTES (AÑO SABER 11 VS SABER PRO)
+# ============================================================
+
+cat("\nCalculando matriz de cohortes...\n")
+
+# Transformamos la base ya cargada a data.table para máxima eficiencia sin volver a leer el CSV
+dt_cohortes <- as.data.table(df)
+
+# Extraer estrictamente los primeros 4 dígitos (el año)
+dt_cohortes[, anio_s11 := substr(trimws(as.character(periodo_sb11)), 1, 4)]
+dt_cohortes[, anio_spro := substr(trimws(as.character(periodo_sbpro)), 1, 4)]
+
+# Filtro de limpieza: garantizar que solo cruce años válidos de 4 dígitos
+dt_cohortes_valido <- dt_cohortes[grepl("^20[0-9]{2}$", anio_s11) & grepl("^20[0-9]{2}$", anio_spro)]
+
+# Generar la matriz cruzada utilizando el ID del estudiante para el conteo
+matriz_cohortes <- dcast(dt_cohortes_valido, 
+                         anio_s11 ~ anio_spro, 
+                         fun.aggregate = length, 
+                         value.var = "S11_estu_estudiante")
+
+# Imprimir resumen de la matriz en consola
+total_emparejados <- sum(as.matrix(matriz_cohortes[, -1, with = FALSE]))
+cat(sprintf("  -> Total de estudiantes emparejados en la matriz: %s\n", format(total_emparejados, big.mark = ",")))
+
+# Guardar la matriz en Excel en la ruta relativa del proyecto
+ruta_matriz_salida <- file.path(directorio_salida, "Matriz_Cohortes.xlsx")
+write_xlsx(matriz_cohortes, path = ruta_matriz_salida)
+
+cat(sprintf("  -> Matriz exportada a: %s\n", ruta_matriz_salida))
+
+
+# ============================================================
+# 8. EXPORTACIÓN A EXCEL MULTIPESTAÑA PROFESIONAL
 # ============================================================
 
 cat("\n============================================\n")
